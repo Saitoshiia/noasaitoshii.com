@@ -1,0 +1,234 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ─── Brand Palette ───────────────────── */
+  --gold-light: #f3af8f;
+  --gold-dark: #dc8a6e;
+
+  --off-white: #fafafa;
+  --pure-white: #ffffff;
+  --slate: #d8d8d7;
+  --steel: #8e8e8e;
+  --off-black: #1d1d1f;
+  --pure-black: #111111;
+
+  --bg-base-01: #191817;
+  --bg-base-02: #191717;
+  --bg-panel-01: #1e1d1c;
+  --bg-panel-02: #252322;
+  --bg-offset-01: #262424;
+  --bg-offset-02: #2d2b2a;
+
+  /* ─── Semantic Tokens ─────────────────── */
+  --bg: var(--bg-base-01);
+  --surface: var(--bg-panel-01);
+  --surface-hover: var(--bg-panel-02);
+  --border: var(--bg-offset-01);
+  --border-hover: var(--steel);
+
+  --text: var(--off-white);
+  --text-secondary: var(--slate);
+  --muted: var(--steel);
+
+  --accent: var(--gold-light);
+  --accent-dark: var(--gold-dark);
+
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Layout ─────────────────────────────── */
+
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── Header ─────────────────────────────── */
+
+.header {
+  padding: 4rem 0 3.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.header-logo-wrap {
+  margin-bottom: 1.25rem;
+}
+
+.header-logo {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.header-tagline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── Main ───────────────────────────────── */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding: 3.5rem 0;
+}
+
+/* ─── Section ────────────────────────────── */
+
+.section-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ─── About ──────────────────────────────── */
+
+.about-text {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 520px;
+}
+
+/* ─── Links ──────────────────────────────── */
+
+.links-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.link-card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+}
+
+.link-card.featured {
+  padding: 1.1rem 1.25rem;
+}
+
+.link-icon {
+  font-size: 1rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.12s ease;
+}
+
+.link-card:hover .link-icon {
+  color: var(--accent);
+}
+
+.link-card.featured .link-icon {
+  font-size: 1.125rem;
+}
+
+.link-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-card.featured .link-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ─── Contact ────────────────────────────── */
+
+.contact-email {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  display: inline-block;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: border-color 0.12s ease;
+}
+
+.contact-email:hover {
+  border-color: var(--muted);
+}
+
+/* ─── Footer ─────────────────────────────── */
+
+.footer {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer p {
+  font-size: 0.6875rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─── Responsive ─────────────────────────── */
+
+@media (max-width: 480px) {
+  .header {
+    padding: 2.5rem 0 2.5rem;
+  }
+
+  .links-featured,
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+}

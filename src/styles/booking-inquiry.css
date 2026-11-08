@@ -1,0 +1,408 @@
+.booking-page {
+  padding-block: clamp(var(--s-space-16), 9vw, var(--s-space-24));
+}
+
+.booking-page__header {
+  display: grid;
+  max-width: 48rem;
+  gap: var(--s-space-6);
+  margin-block-end: clamp(var(--s-space-16), 8vw, var(--s-space-24));
+}
+
+.booking-page h1 {
+  max-width: 11em;
+  font-family: var(--noa-font-display);
+  font-size: clamp(var(--s-type-size-header-01), 8vw, 5.75rem);
+  font-weight: var(--s-type-weight-regular);
+  line-height: var(--s-type-line-heading-tight);
+  letter-spacing: var(--s-type-tracking-display);
+  color: var(--noa-text-ivory);
+}
+
+.booking-page__intro {
+  max-width: var(--s-type-measure-prose);
+  font-size: var(--s-type-size-header-07);
+  line-height: var(--s-type-line-body);
+  color: var(--s-text-secondary);
+}
+
+.booking-inquiry {
+  display: grid;
+  min-width: 0;
+  gap: var(--s-space-10);
+}
+
+.booking-inquiry__progress {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-block: var(--site-rule);
+  font-family: var(--s-font-mono);
+  font-size: var(--s-type-size-caption-02);
+  line-height: var(--s-type-line-caption);
+  letter-spacing: var(--s-type-tracking-caption);
+  text-transform: uppercase;
+  color: var(--s-text-muted);
+}
+
+.booking-inquiry__progress span {
+  padding-block: var(--s-space-3);
+  border-inline-start: var(--site-rule);
+}
+
+.booking-inquiry__progress span:first-child {
+  border-inline-start: 0;
+}
+
+.booking-inquiry__progress [aria-current="step"] {
+  color: var(--s-text-accent);
+}
+
+.booking-inquiry__errorSummary {
+  padding: var(--s-space-6);
+  border: 1px solid color-mix(in oklch, var(--s-color-danger) 54%, transparent);
+  color: var(--s-text-primary);
+  background: color-mix(in oklch, var(--s-color-danger) 8%, var(--s-surface-panel));
+}
+
+.booking-inquiry__errorSummary h2 {
+  font-size: var(--s-type-size-header-06);
+}
+
+.booking-inquiry__errorSummary ul {
+  display: grid;
+  padding-inline-start: var(--s-space-6);
+  gap: var(--s-space-2);
+  margin-block-end: var(--s-space-0);
+}
+
+.booking-inquiry__errorSummary a {
+  text-decoration: underline;
+  text-underline-offset: var(--s-space-1);
+}
+
+.booking-inquiry__form,
+.booking-inquiry__edit,
+.booking-inquiry__review {
+  min-width: 0;
+}
+
+.booking-inquiry__edit,
+.booking-inquiry__review {
+  display: grid;
+  gap: var(--s-space-10);
+}
+
+.booking-inquiry__sectionHeading {
+  display: grid;
+  max-width: var(--s-type-measure-prose);
+  gap: var(--s-space-2);
+}
+
+.booking-inquiry__sectionHeading h2,
+.booking-inquiry__success h2 {
+  font-family: var(--noa-font-display);
+  font-size: clamp(var(--s-type-size-header-03), 5vw, var(--s-type-size-header-01));
+  font-weight: var(--s-type-weight-regular);
+  line-height: var(--s-type-line-heading);
+  letter-spacing: var(--s-type-tracking-display);
+  color: var(--noa-text-ivory);
+}
+
+.booking-inquiry__fields {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-space-6);
+}
+
+.booking-inquiry__field {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: var(--s-space-2);
+}
+
+.booking-inquiry__field--wide {
+  grid-column: 1 / -1;
+}
+
+.booking-inquiry__field label,
+.booking-inquiry__choiceGroup legend {
+  font-size: var(--s-type-size-body-02);
+  font-weight: var(--s-type-weight-medium);
+  color: var(--s-text-primary);
+}
+
+.booking-inquiry__field label span,
+.booking-inquiry__choiceGroup legend span,
+.booking-inquiry__check span span {
+  color: var(--s-text-accent);
+}
+
+.booking-inquiry__field input,
+.booking-inquiry__field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: var(--s-space-3) var(--s-space-4);
+  border: 1px solid var(--s-border-subtle);
+  border-radius: var(--s-space-1);
+  font-family: var(--s-font-sans);
+  font-size: var(--s-type-size-body-00);
+  line-height: var(--s-type-line-body);
+  color: var(--s-text-primary);
+  background: color-mix(in oklch, var(--s-surface-panel) 78%, transparent);
+  transition: border-color var(--s-duration-xfast) var(--s-ease-out-quart), background var(--s-duration-fast) var(--s-ease-out-quart);
+}
+
+.booking-inquiry__field textarea {
+  resize: vertical;
+}
+
+.booking-inquiry__field input:hover,
+.booking-inquiry__field textarea:hover {
+  border-color: var(--noa-rule-warm);
+  transition: none;
+}
+
+.booking-inquiry__field input:focus,
+.booking-inquiry__field textarea:focus {
+  border-color: var(--s-text-accent);
+  background: var(--s-surface-panel);
+}
+
+.booking-inquiry__field input:read-only {
+  color: var(--s-text-secondary);
+  cursor: default;
+}
+
+.booking-inquiry__field input:user-invalid,
+.booking-inquiry__field textarea:user-invalid {
+  border-color: var(--s-color-danger);
+}
+
+.booking-inquiry__hint {
+  font-size: var(--s-type-size-caption-01);
+  line-height: var(--s-type-line-caption);
+  color: var(--s-text-muted);
+}
+
+.booking-inquiry__choiceGroup {
+  min-width: 0;
+  padding: var(--s-space-0);
+  border: 0;
+  margin: var(--s-space-0);
+}
+
+.booking-inquiry__choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: var(--s-space-2);
+  margin-block-start: var(--s-space-3);
+}
+
+.booking-inquiry__choices label {
+  display: flex;
+  min-width: 0;
+  padding: var(--s-space-3) var(--s-space-4);
+  border: 1px solid var(--s-border-subtle);
+  border-radius: var(--s-space-1);
+  align-items: center;
+  gap: var(--s-space-3);
+  font-size: var(--s-type-size-body-02);
+  color: var(--s-text-secondary);
+  background: color-mix(in oklch, var(--s-surface-panel) 66%, transparent);
+  cursor: pointer;
+  transition: border-color var(--s-duration-fast) var(--s-ease-out-quart), color var(--s-duration-fast) var(--s-ease-out-quart);
+}
+
+.booking-inquiry__choices label:hover {
+  border-color: var(--noa-rule-warm);
+  color: var(--s-text-primary);
+  transition: none;
+}
+
+.booking-inquiry__choices label:has(input:checked) {
+  border-color: var(--s-text-accent);
+  color: var(--s-text-primary);
+  background: color-mix(in oklch, var(--s-text-accent) 8%, var(--s-surface-panel));
+}
+
+.booking-inquiry__choices input,
+.booking-inquiry__check input {
+  width: var(--s-space-4);
+  height: var(--s-space-4);
+  margin: var(--s-space-0);
+  accent-color: var(--s-color-accent);
+}
+
+.booking-inquiry__conditional {
+  padding: var(--s-space-6);
+  border-radius: var(--s-space-1);
+  background: color-mix(in oklch, var(--s-surface-panel) 62%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-text-primary) 9%, transparent);
+}
+
+.booking-inquiry__conditionalHeading {
+  display: flex;
+  margin-block-end: var(--s-space-6);
+  justify-content: space-between;
+  gap: var(--s-space-4);
+  color: var(--s-text-secondary);
+}
+
+.booking-inquiry__conditionalHeading p {
+  font-weight: var(--s-type-weight-medium);
+  color: var(--s-text-primary);
+}
+
+.booking-inquiry__conditionalHeading span {
+  font-size: var(--s-type-size-body-02);
+}
+
+.booking-inquiry__check {
+  display: flex;
+  max-width: var(--s-type-measure-prose);
+  align-items: flex-start;
+  gap: var(--s-space-3);
+  font-size: var(--s-type-size-body-02);
+  line-height: var(--s-type-line-body);
+  color: var(--s-text-secondary);
+  cursor: pointer;
+}
+
+.booking-inquiry__check input {
+  flex: 0 0 auto;
+  margin-block-start: var(--s-space-1);
+}
+
+.booking-inquiry__honeypot {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  left: -10000px;
+}
+
+.booking-inquiry__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--s-space-3);
+  padding-block-start: var(--s-space-6);
+  border-block-start: var(--site-rule);
+}
+
+.booking-inquiry__button {
+  cursor: pointer;
+}
+
+.booking-inquiry__button:active {
+  transform: translateY(var(--s-space-1));
+}
+
+.booking-inquiry__button:disabled {
+  border-color: var(--s-border-subtle);
+  color: var(--s-text-muted);
+  background: var(--s-surface-panel);
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.booking-inquiry__reviewList {
+  display: grid;
+  margin: var(--s-space-0);
+  border-block-start: var(--site-rule);
+}
+
+.booking-inquiry__reviewList div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr);
+  gap: var(--s-space-6);
+  padding-block: var(--s-space-4);
+  border-block-end: var(--site-rule);
+}
+
+.booking-inquiry__reviewList dt {
+  font-family: var(--s-font-mono);
+  font-size: var(--s-type-size-caption-01);
+  line-height: var(--s-type-line-caption);
+  letter-spacing: var(--s-type-tracking-caption);
+  text-transform: uppercase;
+  color: var(--s-text-muted);
+}
+
+.booking-inquiry__reviewList dd {
+  min-width: 0;
+  margin: var(--s-space-0);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  color: var(--s-text-primary);
+}
+
+.booking-inquiry__status {
+  min-height: var(--s-type-line-body);
+  color: var(--s-text-secondary);
+}
+
+.booking-inquiry[data-state="error"] .booking-inquiry__status {
+  color: var(--s-color-danger);
+}
+
+.booking-inquiry__success {
+  display: grid;
+  max-width: var(--s-type-measure-prose);
+  padding-block: var(--s-space-16);
+  gap: var(--s-space-6);
+  border-block: var(--site-rule);
+}
+
+.booking-inquiry__success p {
+  color: var(--s-text-secondary);
+}
+
+.booking-inquiry__success a {
+  width: fit-content;
+  border-block-end: 1px solid var(--noa-rule-warm);
+  color: var(--s-text-accent);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 42rem) {
+  .booking-inquiry__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .booking-inquiry__conditional {
+    padding: var(--s-space-4);
+  }
+
+  .booking-inquiry__conditionalHeading {
+    display: grid;
+  }
+
+  .booking-inquiry__reviewList div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-space-2);
+  }
+
+  .booking-inquiry__actions {
+    display: grid;
+  }
+
+  .booking-inquiry__button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-inquiry *,
+  .booking-inquiry *::before,
+  .booking-inquiry *::after {
+    scroll-behavior: auto !important;
+    transition-duration: var(--s-duration-reduced) !important;
+    animation-duration: var(--s-duration-reduced) !important;
+  }
+}

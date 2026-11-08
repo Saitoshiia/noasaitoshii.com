@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import EventRow from '../../components/EventRow.astro'
+import { getPastEvents, getUpcomingEvents } from '../../data/events.js'
+import '../../styles/events-archive.css'
+
+const upcomingEvents = getUpcomingEvents()
+const pastEvents = getPastEvents()
+---
+
+<BaseLayout
+  title="Noa Saitoshii Events: Upcoming appearances & archive"
+  description="Upcoming and past Noa Saitoshii DJ appearances across San Francisco, livestreams, and the Final Fantasy XIV metaverse."
+>
+  <article class="events-archive page-shell">
+    <header class="events-archive__header" data-reveal>
+      <h1>Events</h1>
+      <p class="events-archive__intro">
+        Where Noa is playing next. A record of the rooms, streams, and
+        worlds that came before.
+      </p>
+      <nav class="events-archive__nav" aria-label="Event archive sections">
+        <a href="#upcoming">Upcoming Events <span data-upcoming-count>{upcomingEvents.length}</span></a>
+        <a href="#past">Past <span data-past-count>{pastEvents.length}</span></a>
+      </nav>
+    </header>
+
+    <section class="events-archive__section" id="upcoming" aria-labelledby="upcoming-title">
+      <div class="section-heading" data-reveal>
+        <h2 id="upcoming-title">Upcoming Events</h2>
+      </div>
+      <div class="index-list" data-event-list="upcoming" data-reveal>
+        {upcomingEvents.map((event) => <EventRow event={event} archive />)}
+      </div>
+      <p class="events-archive__empty muted" data-event-empty="upcoming" hidden={upcomingEvents.length > 0}>
+        No upcoming appearances are published right now. Check Twitch or the
+        Saitoshiia Discord for the next announcement.
+      </p>
+    </section>
+
+    <section class="events-archive__section events-archive__section--past" id="past" aria-labelledby="past-title">
+      <div class="section-heading" data-reveal>
+        <h2 id="past-title">Past Events</h2>
+        <p class="events-archive__note">Newest first · Detail pages remain available</p>
+      </div>
+      <div class="index-list" data-event-list="past" data-reveal>
+        {pastEvents.map((event) => <EventRow event={event} archive />)}
+      </div>
+      <p class="events-archive__empty muted" data-event-empty="past" hidden={pastEvents.length > 0}>
+        The published appearance archive is still being assembled.
+      </p>
+    </section>
+  </article>
+
+  <script>
+    const classifyRows = () => {
+      const now = Date.now()
+      const upcomingList = document.querySelector('[data-event-list="upcoming"]')
+      const pastList = document.querySelector('[data-event-list="past"]')
+      const rows = Array.from(document.querySelectorAll('[data-event-archive-row]'))
+      const upcoming = rows.filter((row) => Date.parse(row.dataset.eventEnd) > now)
+        .sort((a, b) => Date.parse(a.dataset.eventStart) - Date.parse(b.dataset.eventStart))
+      const past = rows.filter((row) => Date.parse(row.dataset.eventEnd) <= now)
+        .sort((a, b) => Date.parse(b.dataset.eventStart) - Date.parse(a.dataset.eventStart))
+
+      upcoming.forEach((row) => upcomingList?.append(row))
+      past.forEach((row) => pastList?.append(row))
+      document.querySelector('[data-upcoming-count]').textContent = String(upcoming.length)
+      document.querySelector('[data-past-count]').textContent = String(past.length)
+      document.querySelector('[data-event-empty="upcoming"]').hidden = upcoming.length > 0
+      document.querySelector('[data-event-empty="past"]').hidden = past.length > 0
+    }
+
+    classifyRows()
+    window.setInterval(classifyRows, 60000)
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) classifyRows()
+    })
+  </script>
+</BaseLayout>

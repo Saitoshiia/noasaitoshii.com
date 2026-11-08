@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import EventTime from '../../components/EventTime.astro'
+import { events, projectEventLifecycle } from '../../data/events.js'
+import { groupSetTimes } from '../../lib/group-set-times.mjs'
+import { getAttendanceLabels, getExperienceLabel } from '../../lib/event-presentation.mjs'
+
+export function getStaticPaths() {
+  const buildClock = new Date()
+  return events.map((event) => ({
+    params: { slug: event.slug },
+    props: {
+      event: projectEventLifecycle(event, buildClock),
+      sourceStatus: event.status,
+    },
+  }))
+}
+
+const { event, sourceStatus } = Astro.props
+const stream = event.type === 'stream'
+const lineupGroups = event.lineupStatus === 'confirmed' ? groupSetTimes(event.setTimes) : []
+const eventDescription = stream
+  ? `${event.title}: a Noa Saitoshii livestream on ${event.location}.`
+  : `${event.title}: ${event.location}. Event details and Noa Saitoshii set time.`
+const experience = getExperienceLabel(event)
+const attendance = getAttendanceLabels(event)
+const zones = [
+  ['Los Angeles', 'America/Los_Angeles'],
+  ['New York', 'America/New_York'],
+  ['London', 'Europe/London'],
+  ['Tokyo', 'Asia/Tokyo'],
+]
+const eventImage = '/avatar.jpg'
+const eventUrl = new URL(`/events/${event.slug}`, Astro.site).href
+const eventAttendanceMode = event.type === 'irl'
+  ? event.isLivestream
+    ? 'https://schema.org/MixedEventAttendanceMode'
+    : 'https://schema.org/OfflineEventAttendanceMode'
+  : 'https://schema.org/OnlineEventAttendanceMode'
+const eventLocation = event.type === 'irl'
+  ? {
+      '@type': 'Place',
+      name: event.venue || event.location,
+      address: event.address
+        ? {
+            '@type': 'PostalAddress',
+            streetAddress: event.address,
+            addressLocality: event.location,
+          }
+        : undefined,
+    }
+  : {
+      '@type': 'VirtualLocation',
+      url: event.streamUrl || event.primaryUrl || eventUrl,
+    }
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicEvent',
+  name: event.title,
+  startDate: event.startsAt,
+  endDate: event.endsAt,
+  eventAttendanceMode,
+  location: eventLocation,
+  performer: {
+    '@type': 'Person',
+    name: 'Noa Saitoshii',
+    url: 'https://noasaitoshii.com',
+  },
+  url: eventUrl,
+  image: new URL(eventImage, Astro.site).href,
+  description: eventDescription,
+}
+---
+
+<BaseLayout title={`${event.title}: Noa Saitoshii`} description={eventDescription} image={eventImage}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(eventSchema)} />
+  <article
+    class="event-detail page-shell"
+    data-preview-event
+    data-event-slug={event.slug}
+    data-event-title={event.title}
+    data-preview-start={event.startsAt}
+    data-preview-end={event.endsAt}
+    data-event-status={sourceStatus}
+  >
+    <a class="back-link" href="/events">← Events</a>
+    <header class="event-detail-header">
+      <h1>{event.title}</h1>
+      <p>{event.subtitle && !['Live on Twitch', 'A Saitoshiia event', 'An in-person appearance'].includes(event.subtitle) ? `${event.subtitle} · ` : ''}{experience} · {attendance.join(' + ')} · <span
+        data-event-lifecycle-status
+        data-source-status={sourceStatus}
+        data-canonical-start={event.startsAt}
+        data-canonical-end={event.endsAt}
+      >{event.status}</span></p>
+    </header>
+
+    <section class="event-now" aria-labelledby="when-heading">
+      <div>
+        <p class="micro-label" id="when-heading">{stream ? 'Stream time' : event.noaStartsAt ? 'When to see Noa' : 'Event begins'}</p>
+        <EventTime
+          class="event-time-large"
+          startsAt={event.noaStartsAt || event.startsAt}
+          endsAt={event.noaEndsAt || event.endsAt}
+          eventTimeZone={event.eventTimeZone}
+          preferViewerLocal={event.type !== 'irl'}
+        />
+        <p class="timezone-note">Virtual time in <strong data-timezone-name>your timezone when available</strong>; in-person time uses the venue timezone.</p>
+        {!stream && !event.noaStartsAt && <p class="publish-note">Noa's set time has not yet been published.</p>}
+      </div>
+      <p
+        class="countdown"
+        data-countdown
+        data-start={event.noaStartsAt || event.startsAt}
+        data-end={event.noaEndsAt || event.endsAt}
+      ></p>
+    </section>
+
+    <details class="timezone-panel">
+      <summary>Compare time zones <span>+</span></summary>
+      <div class="timezone-grid">
+        {zones.map(([label, zone]) => (
+          <div data-zone={zone} data-start={event.noaStartsAt || event.startsAt}>
+            <span>{label}</span>
+            <strong>Loading</strong>
+          </div>
+        ))}
+      </div>
+    </details>
+
+    <section class="event-facts" aria-label="Event details">
+      {event.venue && event.venue !== 'Online' && <div><span>Venue</span><strong>{event.venue}</strong></div>}
+      <div><span>Attendance</span><strong>{attendance.join(' · ')}</strong></div>
+      <div><span>Location</span><strong>{event.location}</strong></div>
+      {event.address && <div><span>Address</span><strong>{event.address}</strong></div>}
+      <div><span>Experience</span><strong>{experience}</strong></div>
+      {stream && event.topic && event.topic !== 'DJ Set' && <div><span>Topic</span><strong>{event.topic}</strong></div>}
+      {event.genre && <div><span>Genre</span><strong>{event.genre}</strong></div>}
+      {event.theme && <div><span>Theme</span><strong>{event.theme}</strong></div>}
+    </section>
+
+    {!stream && <section class="lineup-section" aria-labelledby="lineup-heading">
+      <h2 id="lineup-heading">Artists & set times</h2>
+      {event.lineupStatus === 'confirmed' ? (
+        <div class="lineup-stages">
+          {lineupGroups.map((group) => (
+            <section class="lineup-stage" aria-label={group.name ? `${group.name} lineup` : 'Event lineup'}>
+              {group.name && (
+                <header class="lineup-stage__head">
+                  <p class="lineup-stage__index">Room / Stage {String(group.order).padStart(2, '0')}</p>
+                  <h3 class="lineup-stage__name">{group.name}</h3>
+                </header>
+              )}
+              <div class="lineup-list">
+                {group.sets.map((set) => (
+                  <div
+                    class:list={['lineup-row', set.name.includes('Noa Saitoshii') && 'lineup-row--noa']}
+                    data-preview-set
+                    data-set-start={set.startsAtUtc}
+                    data-set-end={set.endsAtUtc}
+                  >
+                    <strong>
+                      {set.streamUrl
+                        ? <a href={set.streamUrl} target="_blank" rel="noreferrer">{set.name} ↗</a>
+                        : set.name}
+                    </strong>
+                    <EventTime
+                      startsAt={set.startsAtUtc}
+                      endsAt={set.endsAtUtc}
+                      eventTimeZone={event.eventTimeZone}
+                      preferViewerLocal={false}
+                    />
+                    <span class="preview-set-state" data-preview-set-state hidden>On now</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div class="lineup-list">
+          <div class="lineup-row lineup-row--tba">
+            <strong>Lineup TBA</strong>
+            <span>Set times publish together once every booking is confirmed.</span>
+          </div>
+        </div>
+      )}
+    </section>}
+
+    <section class="event-actions" aria-label="Event links">
+      {event.primaryUrl ? (
+        <a class="button" href={event.primaryUrl} target="_blank" rel="noreferrer">{event.cta} ↗</a>
+      ) : (
+        <p class="muted">Additional event links will appear here when published.</p>
+      )}
+      {event.secondaryUrl && <a class="text-link" href={event.secondaryUrl} target="_blank" rel="noreferrer">Join the Saitoshiia Discord ↗</a>}
+    </section>
+  </article>
+
+  <script>
+    import { bindPageLifecycle, createEventLifecycleController } from '../../lib/runtime-freshness.mjs'
+
+    const getViewerTimeZone = () => {
+      try {
+        const zone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        new Intl.DateTimeFormat('en-US', { timeZone: zone }).format()
+        return zone
+      } catch {
+        return null
+      }
+    }
+    const timezone = getViewerTimeZone()
+    const timezoneLabel = timezone ? (() => {
+      const parts = new Intl.DateTimeFormat(undefined, { timeZone: timezone, timeZoneName: 'long' }).formatToParts(new Date())
+      const name = parts.find((part) => part.type === 'timeZoneName')?.value
+      return name?.replace(/ (?:Standard|Daylight) Time$/, ' Time') || timezone
+    })() : null
+    document.querySelectorAll('[data-timezone-name]').forEach((node) => {
+      node.textContent = timezoneLabel ? `your timezone · ${timezoneLabel}` : 'your timezone unavailable'
+      if (timezone) node.title = timezone
+    })
+
+    const formatRange = (startValue, endValue, zone) => {
+      const start = new Date(startValue)
+      const end = endValue ? new Date(endValue) : null
+      const date = new Intl.DateTimeFormat(undefined, { timeZone: zone, weekday: 'long', month: 'long', day: 'numeric' }).format(start)
+      const time = new Intl.DateTimeFormat(undefined, { timeZone: zone, hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(start)
+      const endTime = end ? new Intl.DateTimeFormat(undefined, { timeZone: zone, hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(end) : null
+      return `${date} · ${time}${endTime ? `–${endTime}` : ''}`
+    }
+
+    document.querySelectorAll('.timezone-grid [data-zone]').forEach((node) => {
+      const output = node.querySelector('strong')
+      if (output) output.textContent = formatRange(node.dataset.start, null, node.dataset.zone || 'UTC')
+    })
+
+    const statusTarget = document.querySelector('[data-event-lifecycle-status]')
+    const countdown = document.querySelector('[data-countdown]')
+    const lifecycleController = createEventLifecycleController({
+      sourceStatus: statusTarget?.dataset.sourceStatus,
+      eventStartsAt: statusTarget?.dataset.canonicalStart,
+      eventEndsAt: statusTarget?.dataset.canonicalEnd,
+      countdownStartsAt: countdown?.dataset.start,
+      countdownEndsAt: countdown?.dataset.end,
+      isVisible: () => !document.hidden,
+      render: ({ status, countdown: countdownText }) => {
+        if (statusTarget) statusTarget.textContent = status
+        if (countdown) {
+          countdown.textContent = countdownText || ''
+          countdown.hidden = !countdownText
+        }
+      },
+    })
+    bindPageLifecycle({
+      controller: lifecycleController,
+      documentRef: document,
+      windowRef: window,
+      isVisible: () => !document.hidden,
+    })
+    lifecycleController.start()
+  </script>
+</BaseLayout>

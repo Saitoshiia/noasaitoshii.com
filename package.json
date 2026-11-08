@@ -4,11 +4,20 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "sync:events": "../../../../ops/notion/scripts/sync-public-events-local.sh",
+    "build": "npm run validate:data && ASTRO_TELEMETRY_DISABLED=1 astro build && node src/lib/check-inline-spacing.mjs",
+    "build:public": "npm run build && node tools/exclude-deferred-routes.mjs && node tools/verify-public-artifact.mjs",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "preview:cloudflare": "WRANGLER_LOG_PATH=/tmp/noasaitoshii-wrangler.log CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false wrangler dev",
+    "preview:intake": "npm run build && WRANGLER_LOG_PATH=/tmp/noasaitoshii-media-intake-wrangler.log CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false wrangler dev --env local --local --ip 127.0.0.1",
+    "preview:staging": "WRANGLER_LOG_PATH=/tmp/noasaitoshii-wrangler.log CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false wrangler dev --env staging",
+    "pull:intake": "node tools/pull-show-media.mjs",
+    "test": "node --test tests/*.mjs worker/*.test.mjs",
+    "test:access": "node --test worker/access.test.mjs",
+    "validate:data": "node src/lib/validate-shipped-events.mjs",
+    "check:staging": "npm run build && WRANGLER_LOG_PATH=/tmp/noasaitoshii-wrangler.log WRANGLER_SEND_METRICS=false wrangler deploy --env staging --dry-run",
+    "deploy": "npm run build:public && WRANGLER_SEND_METRICS=false CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false wrangler deploy"
   },
   "repository": {
     "type": "git",
@@ -16,14 +25,16 @@
   },
   "author": "Noa Saitoshii",
   "license": "ISC",
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.4.0"
-  },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "gh-pages": "^6.3.0",
-    "vite": "^6.1.0"
+    "@astrojs/cloudflare": "14.1.0",
+    "astro": "7.1.3",
+    "vite": "8.0.16",
+    "wrangler": "4.114.0"
+  },
+  "overrides": {
+    "@cloudflare/vite-plugin": "1.47.0",
+    "anymatch": {
+      "picomatch": "2.3.2"
+    }
   }
 }

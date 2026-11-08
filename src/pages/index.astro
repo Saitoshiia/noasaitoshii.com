@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import EventRow from '../components/EventRow.astro'
+import LiveNow from '../components/LiveNow.astro'
+import { getUpcomingEvents } from '../data/events.js'
+import { sets } from '../data/sets.js'
+
+const events = getUpcomingEvents()
+const socialLinks = [
+  ['Twitch', 'Live DJ sets', 'https://www.twitch.tv/noasaitoshii'],
+  ['SoundCloud', 'DJ set archive', 'https://soundcloud.com/noasaitoshii'],
+  ['Instagram', '@noasaitoshii', 'https://www.instagram.com/noasaitoshii'],
+  ['TikTok', '@noasaitoshii', 'https://www.tiktok.com/@noasaitoshii'],
+  ['Discord', 'Saitoshiia community', 'https://discord.gg/saitoshiia'],
+]
+---
+
+<BaseLayout>
+  <section class="hero page-shell">
+    <div class="hero__cluster" data-reveal>
+      <h1>Noa Saitoshii</h1>
+      <div class="rule-pair" aria-hidden="true"></div>
+      <div class="hero-meta">
+        <p><span>Based</span>San Francisco & the metaverse</p>
+        <p><span>Sound</span>Melodic house · Progressive · Techno · Trance</p>
+      </div>
+      <nav class="hero__links" aria-label="Featured links">
+        <a class="text-link" href="#events">Upcoming events</a>
+        <a class="text-link" href="https://www.twitch.tv/noasaitoshii" target="_blank" rel="noreferrer">Watch on Twitch</a>
+      </nav>
+    </div>
+    <div class="hero__rail" aria-hidden="true">
+      <img src="/favicon.svg" alt="" />
+      <span lang="ja">ノア サイトウシイ</span>
+    </div>
+  </section>
+
+  <LiveNow events={events} />
+
+  <section class="events-section page-shell" id="events" aria-labelledby="events-title">
+    <div class="section-heading" data-reveal>
+      <h2 id="events-title">Upcoming Events</h2>
+    </div>
+    {events.length > 0 ? (
+      <div class="event-list index-list" data-reveal>
+        {events.map((event) => <EventRow event={event} />)}
+      </div>
+    ) : (
+      <p class="muted" data-reveal>
+        No upcoming appearances are published right now. Check Twitch or the
+        Saitoshiia Discord for the next announcement.
+      </p>
+    )}
+    {events.length > 0 && (
+      <p class="muted" data-no-upcoming hidden>
+        No upcoming appearances are published right now. Check Twitch or the
+        Saitoshiia Discord for the next announcement.
+      </p>
+    )}
+    <a class="text-link" href="/events" data-reveal>View the complete event archive →</a>
+  </section>
+
+  <section class="live-section page-shell" aria-labelledby="live-title">
+    <div class="section-heading" data-reveal>
+      <h2 id="live-title">Live stream</h2>
+    </div>
+    <div class="channel-list index-list" data-live-root data-reveal>
+      <a class="index-row channel-row" href="https://www.twitch.tv/noasaitoshii" target="_blank" rel="noreferrer" data-channel="noasaitoshii">
+        <span class="status-dot"></span>
+        <span class="row-title"><strong>Main channel</strong></span>
+        <span class="channel-description">DJ sets & music collaboration streams</span>
+        <span class="channel-state">Checking status…</span>
+        <span class="row-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="index-row channel-row" href="https://www.twitch.tv/noasaii" target="_blank" rel="noreferrer" data-channel="noasaii">
+        <span class="status-dot"></span>
+        <span class="row-title"><strong>Alt channel</strong></span>
+        <span class="channel-description">Creative work · FFXIV housing · gaming · process</span>
+        <span class="channel-state">Checking status…</span>
+        <span class="row-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <p class="live-note" data-reveal>Streams follow the events schedule. Nothing autoplays here.</p>
+  </section>
+
+  <section class="listen-section page-shell" id="listen" aria-labelledby="listen-title">
+    <div class="section-heading" data-reveal>
+      <h2 id="listen-title">Recorded sets</h2>
+    </div>
+    <div class="set-list index-list" data-reveal>
+      {sets.map((set, index) => (
+        <a class="index-row set-row" href={set.url} target="_blank" rel="noreferrer">
+          <span class="row-meta row-index">{String(index + 1).padStart(2, '0')}</span>
+          <span class="row-title"><strong>{set.title}</strong><small>{set.descriptor}</small></span>
+          <span class="row-meta">{set.label} · {set.date.slice(0, 4)}</span>
+          <span class="row-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+    <a class="text-link" href="https://soundcloud.com/noasaitoshii" target="_blank" rel="noreferrer" data-reveal>Complete archive on SoundCloud ↗</a>
+  </section>
+
+  <section class="about-section page-shell" id="about" aria-labelledby="about-title">
+    <div class="section-heading" data-reveal>
+      <h2 id="about-title">About</h2>
+    </div>
+    <div class="about-grid" data-reveal>
+      <p class="about-lead">Noa Saitoshii is a DJ and multidisciplinary artist creating immersive electronic music experiences across physical and virtual worlds.</p>
+      <div class="about-copy">
+        <p>His sets move fluidly through melodic house, progressive grooves, techno pressure, uplifting trance, and the quieter spaces between them.</p>
+        <p>A former professional graphic designer, Noa brings the same attention to rhythm, hierarchy, and atmosphere to the worlds surrounding the music. Through Saitoshiia, he has built and curated three virtual nightlife venues for an international community.</p>
+      </div>
+    </div>
+    <div class="credibility" data-reveal>
+      <p class="micro-label">Shared lineups & stages with</p>
+      <p>Gabriel & Dresden <span>·</span> Morgan Page <span>·</span> Daxson <span>·</span> Valentina Soto <span>·</span> Triode <span>·</span> Donald Glaude <span>·</span> Monic</p>
+      <a class="text-link" href="mailto:contact@saitoshii.com">Bookings & press →</a>
+    </div>
+  </section>
+
+  <section class="links-section page-shell" id="links" aria-labelledby="links-title">
+    <div class="section-heading" data-reveal>
+      <h2 id="links-title">Links</h2>
+    </div>
+    <div class="social-list index-list" data-reveal>
+      {socialLinks.map(([label, description, url], index) => (
+        <a class="index-row social-row" href={url} target="_blank" rel="noreferrer">
+          <span class="row-meta row-index">{String(index + 1).padStart(2, '0')}</span>
+          <span class="row-title"><strong>{label}</strong></span>
+          <span class="row-meta">{description}</span>
+          <span class="row-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="contact-section page-shell" id="contact" aria-labelledby="contact-title">
+    <div class="section-heading" data-reveal>
+      <h2 id="contact-title">Contact</h2>
+    </div>
+    <div class="contact-grid" data-reveal>
+      <p class="contact-intro">Bookings, collaborations, and press</p>
+      <div class="contact-list">
+        <a href="mailto:contact@saitoshii.com">
+          <span>Email</span><strong>contact@saitoshii.com</strong>
+        </a>
+        <a href="https://www.instagram.com/noasaitoshii" target="_blank" rel="noreferrer">
+          <span>Direct</span><strong>Instagram</strong>
+        </a>
+        <a href="https://discord.gg/saitoshiia" target="_blank" rel="noreferrer">
+          <span>Community</span><strong>Discord</strong>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { bindPageLifecycle, createTwitchRefreshController, isLivePayload } from '../lib/runtime-freshness.mjs'
+
+    const refreshUpcomingEvents = () => {
+      const now = Date.now()
+      const rows = Array.from(document.querySelectorAll('[data-upcoming-event]'))
+      let visible = 0
+      rows.forEach((row) => {
+        const ended = Date.parse(row.dataset.eventEnd) <= now
+        row.hidden = ended
+        if (!ended) visible += 1
+      })
+      const empty = document.querySelector('[data-no-upcoming]')
+      if (empty) empty.hidden = visible > 0
+    }
+    refreshUpcomingEvents()
+    window.setInterval(refreshUpcomingEvents, 60000)
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) refreshUpcomingEvents()
+    })
+
+    const channelNames = ['noasaitoshii', 'noasaii']
+    const renderLive = (payload) => {
+      let anyLive = false
+      document.querySelectorAll('[data-channel]').forEach((row) => {
+        const channel = payload.channels[row.dataset.channel]
+        const live = channel.live
+        anyLive ||= live
+        row.toggleAttribute('data-is-live', live)
+        row.querySelector('.channel-state').textContent = live ? 'Live now' : 'Offline'
+      })
+      document.querySelector('[data-header-dot]')?.toggleAttribute('data-is-live', anyLive)
+      const headerStatus = document.querySelector('[data-header-status]')
+      if (headerStatus) headerStatus.textContent = anyLive ? 'Live now' : 'Twitch'
+    }
+
+    const renderLiveUnavailable = () => {
+      document.querySelectorAll('[data-channel]').forEach((row) => {
+        row.removeAttribute('data-is-live')
+        row.querySelector('.channel-state').textContent = 'View channel'
+      })
+      document.querySelectorAll('[data-header-dot], [data-header-status]').forEach((node) => {
+        node.removeAttribute('data-is-live')
+      })
+      const headerStatus = document.querySelector('[data-header-status]')
+      if (headerStatus) headerStatus.textContent = 'Twitch'
+    }
+
+    const liveController = createTwitchRefreshController({
+      request: ({ signal }) => fetch('/api/live', {
+        headers: { accept: 'application/json' },
+        signal,
+      }),
+      validatePayload: (payload) => isLivePayload(payload, channelNames),
+      onSuccess: renderLive,
+      onUnavailable: renderLiveUnavailable,
+      isVisible: () => !document.hidden,
+    })
+    bindPageLifecycle({
+      controller: liveController,
+      documentRef: document,
+      windowRef: window,
+      isVisible: () => !document.hidden,
+    })
+    liveController.start()
+  </script>
+</BaseLayout>

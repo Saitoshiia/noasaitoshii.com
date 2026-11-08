@@ -1,0 +1,208 @@
+---
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import EventLifecyclePreview from '../components/EventLifecyclePreview.astro'
+import '../styles/global.css'
+
+const {
+  title = 'Noa Saitoshii: DJ & Artist',
+  description = 'Noa Saitoshii is a DJ, artist, and world-builder moving between melodic house, progressive grooves, techno, trance, and immersive nightlife.',
+  image = '/avatar.jpg',
+  noindex = false,
+} = Astro.props
+
+const canonical = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="oklch(20.98% 0.0025 67.69)" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/BDMegalona-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/BDMegalona-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Noa Saitoshii',
+      url: 'https://noasaitoshii.com',
+      image: 'https://noasaitoshii.com/avatar.jpg',
+      jobTitle: 'DJ and multidisciplinary artist',
+      sameAs: [
+        'https://www.twitch.tv/noasaitoshii',
+        'https://soundcloud.com/noasaitoshii',
+        'https://www.instagram.com/noasaitoshii',
+        'https://www.tiktok.com/@noasaitoshii',
+      ],
+    })} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-atmosphere" aria-hidden="true">
+      <canvas data-atmosphere></canvas>
+    </div>
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+    <EventLifecyclePreview />
+    <script>
+      const revealItems = document.querySelectorAll('[data-reveal]')
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.setAttribute('data-visible', '')
+              observer.unobserve(entry.target)
+            }
+          })
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 })
+        revealItems.forEach((item) => observer.observe(item))
+      } else {
+        revealItems.forEach((item) => item.setAttribute('data-visible', ''))
+      }
+    </script>
+    <script>
+      // Living gold field — a slow, visible black-to-clay drift with subtle
+      // animated grain. Reduced motion renders one composed frame; no WebGL
+      // falls back to the static CSS gradient field behind the canvas.
+      const canvas = document.querySelector('[data-atmosphere]')
+      const gl = canvas?.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false })
+      if (canvas && gl) {
+        const frag = `
+          precision mediump float;
+          uniform vec2 u_res;
+          uniform float u_time;
+
+          float hash(vec2 p) {
+            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+          }
+          float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            vec2 u = f * f * (3.0 - 2.0 * f);
+            return mix(
+              mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+              mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+              u.y
+            );
+          }
+          float fbm(vec2 p) {
+            float v = 0.0;
+            float a = 0.5;
+            for (int i = 0; i < 4; i++) {
+              v += a * noise(p);
+              p = p * 2.02 + vec2(17.3, 9.1);
+              a *= 0.5;
+            }
+            return v;
+          }
+
+          void main() {
+            vec2 uv = gl_FragCoord.xy / u_res;
+            vec2 p = uv * vec2(u_res.x / u_res.y, 1.0);
+            float t = u_time * 0.032;
+
+            // Slow warped field with broad lateral movement.
+            vec2 drift = vec2(fbm(p * 0.78 + t), fbm(p * 0.78 - t * 0.65));
+            float field = fbm(p * 1.05 + 0.48 * drift + vec2(t * 0.72, -t * 0.22));
+            float veil = fbm(p * 2.15 - 0.24 * drift - vec2(t * 0.28, t * 0.38));
+
+            // Warm near-black paper.
+            vec3 col = vec3(0.096, 0.091, 0.087);
+            // Broad clay-gold mass echoes the SoundCloud/Twitter banner field.
+            float side = smoothstep(-0.08, 1.18, uv.x + uv.y * 0.32);
+            float warmth = smoothstep(0.22, 0.78, field * 0.76 + veil * 0.38);
+            col = mix(col, vec3(0.245, 0.145, 0.105), warmth * (0.22 + 0.5 * side));
+            // Peach-gold light remains off the primary left text column.
+            float bloom = pow(max(veil * side, 0.0), 2.55);
+            col += vec3(0.953, 0.686, 0.561) * bloom * 0.14;
+            // Asymmetric fabric-like occlusion toward lower left.
+            col *= 1.0 - 0.12 * smoothstep(1.1, -0.1, uv.x + uv.y * 0.8);
+            // Fine animated grain stays subordinate to the moving light.
+            float g = hash(gl_FragCoord.xy + fract(u_time * 60.0)) - 0.5;
+            col += mix(vec3(g), vec3(g) * vec3(1.1, 0.95, 0.85), 0.4) * 0.022;
+
+            gl_FragColor = vec4(col, 1.0);
+          }
+        `
+        const vert = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'
+        const compile = (type, source) => {
+          const shader = gl.createShader(type)
+          gl.shaderSource(shader, source)
+          gl.compileShader(shader)
+          return gl.getShaderParameter(shader, gl.COMPILE_STATUS) ? shader : null
+        }
+        const vs = compile(gl.VERTEX_SHADER, vert)
+        const fs = compile(gl.FRAGMENT_SHADER, frag)
+        if (vs && fs) {
+          const program = gl.createProgram()
+          gl.attachShader(program, vs)
+          gl.attachShader(program, fs)
+          gl.linkProgram(program)
+          gl.useProgram(program)
+          gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+          const loc = gl.getAttribLocation(program, 'a')
+          gl.enableVertexAttribArray(loc)
+          gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
+          const uRes = gl.getUniformLocation(program, 'u_res')
+          const uTime = gl.getUniformLocation(program, 'u_time')
+
+          // The field is soft by nature; render at reduced resolution.
+          const scale = 0.5
+          const resize = () => {
+            canvas.width = Math.max(1, Math.floor(innerWidth * scale))
+            canvas.height = Math.max(1, Math.floor(innerHeight * scale))
+            gl.viewport(0, 0, canvas.width, canvas.height)
+          }
+          resize()
+          addEventListener('resize', resize)
+
+          const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)')
+          const start = performance.now()
+          const draw = (now) => {
+            gl.uniform2f(uRes, canvas.width, canvas.height)
+            gl.uniform1f(uTime, (now - start) / 1000)
+            gl.drawArrays(gl.TRIANGLES, 0, 3)
+          }
+          let rafId = 0
+          const loop = (now) => {
+            draw(now)
+            rafId = requestAnimationFrame(loop)
+          }
+          const setMotion = () => {
+            cancelAnimationFrame(rafId)
+            if (reduceMotion.matches) {
+              draw(performance.now())
+            } else {
+              rafId = requestAnimationFrame(loop)
+            }
+          }
+          document.addEventListener('visibilitychange', () => {
+            if (document.hidden) cancelAnimationFrame(rafId)
+            else setMotion()
+          })
+          reduceMotion.addEventListener?.('change', setMotion)
+          setMotion()
+          canvas.setAttribute('data-ready', '')
+        }
+      }
+    </script>
+  </body>
+</html>

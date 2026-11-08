@@ -1,0 +1,238 @@
+---
+// The preview is intentionally inert outside loopback hosts. The control is
+// an explicit local opt-in and never changes the shipped event data.
+---
+
+<script>
+  const LOOPBACK_HOSTNAMES = new Set(['localhost', '127.0.0.1'])
+  const localHost = LOOPBACK_HOSTNAMES.has(window.location.hostname)
+  const params = localHost ? new URLSearchParams(window.location.search) : null
+  const previewSlug = params?.get('preview-live') || null
+  const requestedAt = params?.get('preview-at') || null
+
+  const toDate = (value) => {
+    if (value === null || value === undefined || value === '') return null
+    const date = new Date(value)
+    return Number.isFinite(date.getTime()) ? date : null
+  }
+
+  const eventNodes = Array.from(document.querySelectorAll('[data-preview-event]'))
+  const previewEvents = [...new Map(
+    eventNodes
+      .map((node) => [node.dataset.eventSlug, node])
+      .filter(([slug]) => Boolean(slug)),
+  ).entries()]
+  const selectedNode = previewSlug
+    ? eventNodes.find((node) => node.dataset.eventSlug === previewSlug)
+    : null
+  const selectedStart = toDate(selectedNode?.dataset.previewStart)
+  const selectedEnd = toDate(selectedNode?.dataset.previewEnd)
+  const requestedDate = toDate(requestedAt)
+  const previewDate = requestedDate || (
+    selectedStart && selectedEnd
+      ? new Date(selectedStart.getTime() + Math.min(30 * 60 * 1000, (selectedEnd.getTime() - selectedStart.getTime()) / 2))
+      : new Date()
+  )
+
+  const sourceStatus = (node) => node.dataset.eventStatus || node.querySelector('[data-source-status]')?.dataset.sourceStatus || 'upcoming'
+
+  const getStatus = (node, now) => {
+    const start = toDate(node.dataset.previewStart)
+    const end = toDate(node.dataset.previewEnd)
+    const original = sourceStatus(node)
+    if (original === 'cancelled' || original === 'postponed') return original
+    if (!start || !end || end <= start) return original
+    if (previewSlug && node.dataset.eventSlug === previewSlug && !requestedAt) return 'live'
+    if (end <= now) return 'past'
+    if (start <= now) return 'live'
+    return 'upcoming'
+  }
+
+  const setupPreviewControl = () => {
+    if (!localHost || previewEvents.length === 0) return
+    const controls = document.createElement('aside')
+    controls.className = 'event-preview-controls'
+    controls.setAttribute('aria-label', 'Local event preview controls')
+
+    const details = document.createElement('details')
+    details.open = Boolean(previewSlug || requestedAt)
+    const summary = document.createElement('summary')
+    summary.textContent = previewSlug || requestedAt ? 'Change simulation' : 'Simulate an event'
+    details.append(summary)
+
+    const form = document.createElement('form')
+    form.className = 'event-preview-form'
+    const label = document.createElement('label')
+    label.textContent = 'Event'
+    const select = document.createElement('select')
+    select.setAttribute('aria-label', 'Event to simulate')
+    const formatEventOption = (node, slug) => {
+      const start = node.dataset.previewStart
+      if (!start || !Number.isFinite(Date.parse(start))) return node.dataset.eventTitle || slug
+      const zone = node.querySelector('[data-event-time]')?.dataset.zone || 'UTC'
+      const date = new Intl.DateTimeFormat(undefined, {
+        timeZone: zone,
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      }).format(new Date(start))
+      return `${date} · ${node.dataset.eventTitle || slug}`
+    }
+    previewEvents.forEach(([slug, node]) => {
+      const option = document.createElement('option')
+      option.value = slug
+      option.textContent = formatEventOption(node, slug)
+      option.selected = slug === previewSlug || (!previewSlug && !requestedAt && select.options.length === 0)
+      select.append(option)
+    })
+    label.append(select)
+    const start = document.createElement('button')
+    start.type = 'submit'
+    start.textContent = 'Simulate live'
+    form.append(label, start)
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+      if (!select.value) return
+      const url = new URL(window.location.href)
+      url.searchParams.set('preview-live', select.value)
+      url.searchParams.delete('preview-at')
+      window.location.assign(url.toString())
+    })
+    details.append(form)
+
+    if (previewSlug || requestedAt) {
+      const reset = document.createElement('button')
+      reset.type = 'button'
+      reset.className = 'event-preview-reset'
+      reset.textContent = 'Reset to real time'
+      reset.addEventListener('click', () => {
+        const url = new URL(window.location.href)
+        url.searchParams.delete('preview-live')
+        url.searchParams.delete('preview-at')
+        window.location.assign(url.toString())
+      })
+      details.append(reset)
+    }
+
+    controls.append(details)
+    document.body.prepend(controls)
+  }
+
+  const setList = (node, status) => {
+    const statusTarget = node.querySelector('[data-event-lifecycle-status], [data-preview-status]')
+    if (statusTarget) statusTarget.textContent = status
+    node.toggleAttribute('data-preview-live', status === 'live' && (!previewSlug || node.dataset.eventSlug === previewSlug))
+  }
+
+  const reconcile = () => {
+    if (!localHost || (!previewSlug && !requestedAt)) return
+    const now = previewDate
+    const states = new Map(eventNodes.map((node) => [node, getStatus(node, now)]))
+    states.forEach((status, node) => setList(node, status))
+
+    const lists = new Map(
+      Array.from(document.querySelectorAll('[data-event-list]')).map((list) => [list.dataset.eventList, list]),
+    )
+    eventNodes.filter((node) => node.hasAttribute('data-event-archive-row')).forEach((node) => {
+      const status = states.get(node)
+      const list = lists.get(status === 'past' ? 'past' : 'upcoming')
+      if (list) list.append(node)
+      node.hidden = false
+    })
+
+    document.querySelectorAll('[data-preview-set]').forEach((set) => {
+      const parent = set.closest('[data-preview-event]')
+      const active = !previewSlug || parent?.dataset.eventSlug === previewSlug
+      const start = toDate(set.dataset.setStart)
+      const end = toDate(set.dataset.setEnd)
+      const onNow = active && start && end && start <= now && now < end
+      set.toggleAttribute('data-preview-set-active', Boolean(onNow))
+      const label = set.querySelector('[data-preview-set-state]')
+      if (label) {
+        label.hidden = !onNow
+        label.textContent = onNow ? 'On now' : ''
+      }
+    })
+  }
+
+  setupPreviewControl()
+  reconcile()
+</script>
+
+<style is:global>
+  [data-preview-set-active] {
+    color: var(--s-text-accent);
+  }
+
+  .event-preview-controls {
+    display: flex;
+    position: fixed;
+    inset-block-end: var(--s-space-4);
+    inset-inline-end: var(--s-space-4);
+    z-index: 30;
+    align-items: flex-start;
+    gap: var(--s-space-2);
+    padding: var(--s-space-2) var(--s-space-3);
+    border: var(--site-rule);
+    border-radius: var(--s-space-1);
+    color: var(--s-text-secondary);
+    background: var(--s-surface-panel);
+    font-family: var(--s-font-mono);
+    font-size: var(--s-type-size-caption-02);
+  }
+
+  .event-preview-controls details {
+    display: grid;
+    gap: var(--s-space-2);
+  }
+
+  .event-preview-controls summary {
+    cursor: pointer;
+    color: var(--s-text-primary);
+  }
+
+  .event-preview-form {
+    display: flex;
+    align-items: end;
+    gap: var(--s-space-2);
+  }
+
+  .event-preview-form label {
+    display: grid;
+    gap: var(--s-space-1);
+    color: var(--s-text-muted);
+    font-size: var(--s-type-size-caption-02);
+  }
+
+  .event-preview-form select,
+  .event-preview-controls button {
+    min-height: 2rem;
+    padding: var(--s-space-1) var(--s-space-2);
+    border: var(--site-rule);
+    color: var(--s-text-primary);
+    background: var(--s-surface-panel);
+    font: inherit;
+  }
+
+  .event-preview-controls button {
+    color: var(--s-text-accent);
+    cursor: pointer;
+  }
+
+  .event-preview-reset {
+    justify-self: start;
+    background: transparent !important;
+  }
+
+  @media (max-width: 40rem) {
+    .event-preview-controls {
+      inset-inline: var(--s-space-3);
+      inset-block-end: var(--s-space-3);
+    }
+
+    .event-preview-form {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

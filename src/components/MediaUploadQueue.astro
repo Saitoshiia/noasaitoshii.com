@@ -1,0 +1,138 @@
+<section class="media-intake" data-media-intake aria-labelledby="media-intake-title">
+  <div class="media-intake__intro" data-reveal>
+    <h1 id="media-intake-title">Send me what you saw.</h1>
+    <p>
+      Drop the original photos and short video clips from the night. They stay
+      private, keep their full quality, and are checked before I can download them.
+    </p>
+  </div>
+
+  <div class="media-intake__workspace" data-reveal>
+    <form class="media-intake__details" data-intake-form>
+      <div class="media-intake__field media-intake__field--invite">
+        <label for="media-invite">Invite code</label>
+        <input
+          id="media-invite"
+          name="invite"
+          type="password"
+          inputmode="text"
+          autocomplete="one-time-code"
+          required
+          data-intake-invite
+        />
+        <small>The code from Noa keeps this drop private.</small>
+      </div>
+      <div class="media-intake__invitation" data-intake-invitation hidden>
+        <span class="micro-label">Personal invitation</span>
+        <strong data-intake-invitation-title></strong>
+        <p data-intake-invitation-copy></p>
+      </div>
+      <div class="media-intake__field">
+        <label for="media-name">Your name <span>Optional</span></label>
+        <input id="media-name" name="contributorName" autocomplete="name" maxlength="80" />
+      </div>
+      <div class="media-intake__field">
+        <label for="media-handle">Social handle <span>Name or handle required</span></label>
+        <input id="media-handle" name="handle" autocomplete="off" maxlength="80" placeholder="@you" />
+      </div>
+      <div class="media-intake__field">
+        <label for="media-email">Email <span>Optional</span></label>
+        <input id="media-email" name="email" type="email" autocomplete="email" maxlength="254" />
+        <small>Only used if Noa needs to follow up about these files.</small>
+      </div>
+      <fieldset class="media-intake__choice">
+        <legend>How should Noa credit you?</legend>
+        <label><input type="radio" name="creditPreference" value="social-handle" required /> Social handle</label>
+        <label><input type="radio" name="creditPreference" value="name" /> Name</label>
+        <label><input type="radio" name="creditPreference" value="no-credit" /> No credit needed</label>
+      </fieldset>
+      <div class="media-intake__field media-intake__field--wide">
+        <label for="media-note">A note about the moment <span>Optional</span></label>
+        <textarea id="media-note" name="note" rows="2" maxlength="500"></textarea>
+      </div>
+
+      <fieldset class="media-intake__consent">
+        <legend>Permission to use your media</legend>
+        <label>
+          <input type="checkbox" name="confirmsAuthority" required />
+          <span data-intake-authority>
+            I confirm I created these files or have permission from the creator to share them.
+          </span>
+        </label>
+        <label>
+          <input type="checkbox" name="grantsMediaLicense" required />
+          <span data-intake-license>
+            I give Noa Saitoshii non-exclusive, worldwide, royalty-free permission to store,
+            edit, reproduce, publish, and share these files for artist promotion and social
+            media, with credit according to my selection.
+          </span>
+        </label>
+        <small>
+          Your choices, the wording above, and the time you submit are saved with the files.
+        </small>
+      </fieldset>
+
+      <div
+        class="media-intake__drop"
+        data-intake-drop
+        tabindex="0"
+        role="button"
+        aria-controls="media-files"
+        aria-describedby="media-file-help"
+      >
+        <input
+          id="media-files"
+          type="file"
+          accept=".jpg,.jpeg,.png,.heic,.heif,.mov,.mp4,.m4v,image/jpeg,image/png,image/heic,image/heif,video/quicktime,video/mp4"
+          multiple
+          data-intake-files
+        />
+        <span class="media-intake__drop-mark" aria-hidden="true">＋</span>
+        <span class="media-intake__drop-title" data-intake-drop-title>Choose photos or videos</span>
+        <span class="media-intake__drop-secondary" data-intake-drop-secondary>or drop them here</span>
+        <small id="media-file-help">Original JPG, PNG, HEIC, MOV, MP4, or M4V files only.</small>
+      </div>
+
+      <div class="media-intake__notice" data-intake-notice role="status" aria-live="polite">
+        <span class="media-intake__notice-mark" aria-hidden="true"></span>
+        <span data-intake-notice-copy>Checking whether this drop is open…</span>
+      </div>
+
+      <ol class="media-intake__queue" data-intake-queue aria-label="Files selected for upload"></ol>
+
+      <div class="media-intake__actions">
+        <button class="media-intake__submit" type="submit" data-intake-submit disabled>
+          Send original files
+        </button>
+        <button class="media-intake__secondary" type="button" data-intake-pause hidden>
+          Pause
+        </button>
+        <p data-intake-summary>No files selected</p>
+      </div>
+    </form>
+
+    <aside class="media-intake__trust" aria-label="How your files are handled">
+      <div>
+        <span class="micro-label">Quality</span>
+        <p>Original files arrive without social-app compression.</p>
+      </div>
+      <div>
+        <span class="micro-label">Privacy</span>
+        <p>Nothing you upload is published or made into a public link.</p>
+      </div>
+      <div>
+        <span class="micro-label">Safety</span>
+        <p>Only approved photo and video formats can pass into my private library.</p>
+      </div>
+      <p class="media-intake__fineprint">
+        No public gallery is created. Files that pass technical checks still require
+        Noa’s private approval before download.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<script>
+  import { mountMediaIntake } from '../lib/media-intake-client.js'
+  document.querySelectorAll('[data-media-intake]').forEach((root) => mountMediaIntake(root))
+</script>

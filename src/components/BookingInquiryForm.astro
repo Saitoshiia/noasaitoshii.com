@@ -1,0 +1,239 @@
+---
+// Public request contract. The client sends only these conservative field names:
+// eventName, inquiryType, locationType, contactName, contactEmail, organization,
+// website, startAt, endAt, timezone, feeAccepted, genres, vibe, notes; plus:
+// IRL — venueName, venueAddress, estimatedAttendance, ageRestriction, productionProvided
+// FFXIV — dataCenter, world, venueName, wardPlot
+// Stream — platform, channelUrl, techRequirements
+// Anti-abuse — privacyAccepted, companyFax, cf-turnstile-response
+---
+
+<div class="booking-inquiry" data-booking-inquiry data-reveal>
+  <div class="booking-inquiry__progress" aria-label="Inquiry progress">
+    <span data-progress-edit aria-current="step">01 · Details</span>
+    <span data-progress-review>02 · Review</span>
+    <span data-progress-sent>03 · Sent</span>
+  </div>
+
+  <div
+    class="booking-inquiry__errorSummary"
+    role="alert"
+    aria-labelledby="booking-errors-title"
+    tabindex="-1"
+    data-error-summary
+    hidden
+  >
+    <h2 id="booking-errors-title">Please check the highlighted details.</h2>
+    <ul data-error-list></ul>
+  </div>
+
+  <form class="booking-inquiry__form" data-booking-form novalidate>
+    <section class="booking-inquiry__edit" data-edit-panel aria-labelledby="booking-details-title">
+      <div class="booking-inquiry__sectionHeading">
+        <h2 id="booking-details-title">Tell me what you’re building.</h2>
+      </div>
+
+      <div class="booking-inquiry__fields">
+        <div class="booking-inquiry__field booking-inquiry__field--wide">
+          <label for="eventName">Event or project name <span aria-hidden="true">*</span></label>
+          <input id="eventName" name="eventName" type="text" autocomplete="organization-title" required />
+        </div>
+
+        <fieldset class="booking-inquiry__choiceGroup booking-inquiry__field--wide">
+          <legend>What is the inquiry about? <span aria-hidden="true">*</span></legend>
+          <div class="booking-inquiry__choices">
+            <label><input id="inquiryTypePerformance" type="radio" name="inquiryType" value="performance" required /> Performance</label>
+            <label><input type="radio" name="inquiryType" value="collaboration" /> Collaboration</label>
+            <label><input type="radio" name="inquiryType" value="press" /> Press / interview</label>
+            <label><input type="radio" name="inquiryType" value="other" /> Something else</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="booking-inquiry__choiceGroup booking-inquiry__field--wide">
+          <legend>Where will it happen? <span aria-hidden="true">*</span></legend>
+          <div class="booking-inquiry__choices">
+            <label><input id="locationTypeIrl" type="radio" name="locationType" value="irl" required /> In person</label>
+            <label><input type="radio" name="locationType" value="ffxiv" /> FFXIV</label>
+            <label><input type="radio" name="locationType" value="stream" /> Stream / online</label>
+            <label><input type="radio" name="locationType" value="undecided" /> Not decided</label>
+          </div>
+        </fieldset>
+
+        <div class="booking-inquiry__conditional booking-inquiry__field--wide" data-location-section="irl" hidden>
+          <div class="booking-inquiry__conditionalHeading">
+            <p>In-person details</p>
+            <span>Venue information can be preliminary.</span>
+          </div>
+          <div class="booking-inquiry__fields">
+            <div class="booking-inquiry__field">
+              <label for="venueNameIrl">Venue name <span aria-hidden="true">*</span></label>
+              <input id="venueNameIrl" name="venueName" type="text" autocomplete="organization" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="estimatedAttendance">Estimated attendance</label>
+              <input id="estimatedAttendance" name="estimatedAttendance" type="number" min="1" inputmode="numeric" disabled />
+            </div>
+            <div class="booking-inquiry__field booking-inquiry__field--wide">
+              <label for="venueAddress">Venue address or city</label>
+              <input id="venueAddress" name="venueAddress" type="text" autocomplete="street-address" disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="city">City <span aria-hidden="true">*</span></label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="country">Country <span aria-hidden="true">*</span></label>
+              <input id="country" name="country" type="text" autocomplete="country-name" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="ageRestriction">Age restriction</label>
+              <input id="ageRestriction" name="ageRestriction" type="text" placeholder="For example: 21+" disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="productionProvided">Production provided</label>
+              <input id="productionProvided" name="productionProvided" type="text" placeholder="CDJs, mixer, sound, lighting…" disabled />
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-inquiry__conditional booking-inquiry__field--wide" data-location-section="ffxiv" hidden>
+          <div class="booking-inquiry__conditionalHeading">
+            <p>FFXIV details</p>
+            <span>Share what is known; estimates are welcome.</span>
+          </div>
+          <div class="booking-inquiry__fields">
+            <div class="booking-inquiry__field">
+              <label for="dataCenter">Data center <span aria-hidden="true">*</span></label>
+              <input id="dataCenter" name="dataCenter" type="text" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="world">World <span aria-hidden="true">*</span></label>
+              <input id="world" name="world" type="text" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="venueNameFfxiv">Venue name <span aria-hidden="true">*</span></label>
+              <input id="venueNameFfxiv" name="venueName" type="text" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="wardPlot">Ward / plot</label>
+              <input id="wardPlot" name="wardPlot" type="text" disabled />
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-inquiry__conditional booking-inquiry__field--wide" data-location-section="stream" hidden>
+          <div class="booking-inquiry__conditionalHeading">
+            <p>Stream details</p>
+            <span>Include the destination and technical expectations.</span>
+          </div>
+          <div class="booking-inquiry__fields">
+            <div class="booking-inquiry__field">
+              <label for="platform">Platform <span aria-hidden="true">*</span></label>
+              <input id="platform" name="platform" type="text" placeholder="Twitch, YouTube, another platform…" required disabled />
+            </div>
+            <div class="booking-inquiry__field">
+              <label for="channelUrl">Channel URL <span aria-hidden="true">*</span></label>
+              <input id="channelUrl" name="channelUrl" type="url" inputmode="url" required disabled />
+            </div>
+            <div class="booking-inquiry__field booking-inquiry__field--wide">
+              <label for="techRequirements">Technical requirements</label>
+              <textarea id="techRequirements" name="techRequirements" rows="3" disabled></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-inquiry__field">
+          <label for="startAt">Starts <span aria-hidden="true">*</span></label>
+          <input id="startAt" name="startAt" type="datetime-local" required />
+        </div>
+        <div class="booking-inquiry__field">
+          <label for="endAt">Ends <span aria-hidden="true">*</span></label>
+          <input id="endAt" name="endAt" type="datetime-local" required />
+        </div>
+        <div class="booking-inquiry__field booking-inquiry__field--wide">
+          <label for="timezoneDisplay">Your timezone</label>
+          <input id="timezoneDisplay" type="text" readonly data-timezone-display />
+          <input name="timezone" type="hidden" data-timezone />
+          <p class="booking-inquiry__hint">Captured from this device so the date arrives unambiguously.</p>
+        </div>
+
+        <div class="booking-inquiry__field">
+          <label for="contactName">Your name <span aria-hidden="true">*</span></label>
+          <input id="contactName" name="contactName" type="text" autocomplete="name" required />
+        </div>
+        <div class="booking-inquiry__field">
+          <label for="contactEmail">Email <span aria-hidden="true">*</span></label>
+          <input id="contactEmail" name="contactEmail" type="email" autocomplete="email" inputmode="email" required />
+        </div>
+        <div class="booking-inquiry__field">
+          <label for="organization">Organization</label>
+          <input id="organization" name="organization" type="text" autocomplete="organization" />
+        </div>
+        <div class="booking-inquiry__field">
+          <label for="website">Website or event link</label>
+          <input id="website" name="website" type="url" inputmode="url" autocomplete="url" />
+        </div>
+        <div class="booking-inquiry__field booking-inquiry__field--wide">
+          <label for="genres">Genres or musical direction</label>
+          <input id="genres" name="genres" type="text" placeholder="Melodic house, progressive, techno…" />
+        </div>
+        <div class="booking-inquiry__field booking-inquiry__field--wide">
+          <label for="vibe">Room, audience, and vibe</label>
+          <textarea id="vibe" name="vibe" rows="4"></textarea>
+        </div>
+        <div class="booking-inquiry__field booking-inquiry__field--wide">
+          <label for="notes">Anything else I should know?</label>
+          <textarea id="notes" name="notes" rows="5"></textarea>
+        </div>
+
+        <label class="booking-inquiry__check booking-inquiry__field--wide">
+          <input name="feeAccepted" type="checkbox" required />
+          <span>I understand this is a professional booking inquiry and may involve a performance fee. <span aria-hidden="true">*</span></span>
+        </label>
+
+        <label class="booking-inquiry__check booking-inquiry__field--wide">
+          <input name="privacyAccepted" type="checkbox" required />
+          <span>I agree that these details may be used to review and respond to this inquiry. <span aria-hidden="true">*</span></span>
+        </label>
+
+        <div class="booking-inquiry__honeypot" aria-hidden="true">
+          <label for="companyFax">Fax number</label>
+          <input id="companyFax" name="companyFax" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="booking-inquiry__actions">
+        <button class="button booking-inquiry__button" type="button" data-review-button>
+          Review inquiry
+        </button>
+      </div>
+    </section>
+
+    <section class="booking-inquiry__review" data-review-panel aria-labelledby="booking-review-title" hidden>
+      <div class="booking-inquiry__sectionHeading">
+        <h2 id="booking-review-title" tabindex="-1">Review your inquiry.</h2>
+      </div>
+      <dl class="booking-inquiry__reviewList" data-review-list></dl>
+      <div class="booking-inquiry__actions">
+        <button class="button button--secondary booking-inquiry__button" type="button" data-edit-button>
+          Edit details
+        </button>
+        <button class="button booking-inquiry__button" type="submit" data-submit-button>
+          Send inquiry
+        </button>
+      </div>
+      <p class="booking-inquiry__status" role="status" aria-live="polite" data-submit-status></p>
+    </section>
+  </form>
+
+  <section class="booking-inquiry__success" data-success-panel aria-labelledby="booking-success-title" tabindex="-1" hidden>
+    <h2 id="booking-success-title">Your inquiry is in the room.</h2>
+    <p>Thank you. Noa’s team will review the details and reply to the email you provided.</p>
+    <a href="/">Return home</a>
+  </section>
+</div>
+
+<script>
+  import { initBookingInquiryForms } from '../lib/booking-inquiry-client.js'
+  initBookingInquiryForms()
+</script>

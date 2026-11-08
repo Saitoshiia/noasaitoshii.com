@@ -1,0 +1,24 @@
+{
+  "Rules": [
+    {
+      "ID": "abort-incomplete-media-after-one-day",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "quarantine/"
+      },
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 1
+      }
+    },
+    {
+      "ID": "expire-held-quarantine-after-seven-days",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "quarantine/"
+      },
+      "Expiration": {
+        "Days": 7
+      }
+    }
+  ]
+}

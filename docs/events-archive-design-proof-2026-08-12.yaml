@@ -1,0 +1,49 @@
+design_proof_id: noasaitoshii-events-archive-2026-08-12
+timestamp: 2026-08-12T19:05:00-07:00
+contract_id: noasaitoshii-events-archive-v1
+surface: noasaitoshii.com /events local preview
+design_proof_state: screenshot_proven
+design_drift_state: on_system
+functional_proof: >-
+  Static build passed; tests passed; 19 published Noa-audience events rendered;
+  browser-time classification produced 8 upcoming and 11 past at proof time;
+  event detail pages and site navigation resolve through /events.
+design_lint_result: >-
+  Focused archive test rejects raw hex, rgb(a), and hsl(a) colors and requires
+  responsive and reduced-motion rules.
+token_compliance_result: >-
+  Archive composition uses the existing site shell, event ledger grammar,
+  typography roles, rules, semantic colors, spacing, and motion tokens.
+component_usage_result: >-
+  EventRow centralizes homepage/archive event rendering and reuses EventTime;
+  no replacement card, badge, button, or event-row primitive was introduced.
+accessibility_result: >-
+  Semantic article/header/nav/section structure, labelled sections, native links,
+  visible focus inherited from the site, viewer-local time labels, empty states,
+  and zero horizontal overflow at 1280 px and 390 px.
+screenshot_or_preview_path:
+  - http://127.0.0.1:4321/events
+  - /private/tmp/noasaitoshii-events-archive-hero-2026-08-12.png
+  - /private/tmp/noasaitoshii-events-archive-upcoming-2026-08-12.png
+  - /private/tmp/noasaitoshii-events-archive-past-2026-08-12.png
+  - /private/tmp/noasaitoshii-events-archive-mobile-2026-08-12.png
+responsive_widths_checked:
+  - 1280x720
+  - 390x844
+theme_or_brand_modes_checked:
+  - Noa Saitoshii L7 dark-warm artist brand
+design_enforcer_result: >-
+  Manual review passed for archive hierarchy, row density, upcoming/past
+  distinction, responsive reflow, date ordering, and brand continuity.
+accepted_findings:
+  - Homepage remains a concise upcoming-events introduction.
+  - Complete archive has one canonical route with Upcoming and Past sections.
+  - Elapsed rows move to Past in the browser without waiting for a rebuild.
+  - Past event detail pages remain durable evidence links.
+rejected_findings:
+  - No filtering UI or status dashboard language was added to the public archive.
+  - No unrelated booking or media-intake surface was changed.
+remaining_limitations:
+  - Archive completeness is bounded by the approved Public Events projection.
+  - No event photography is shown until governed media becomes available.
+noa_taste_gate_required: true

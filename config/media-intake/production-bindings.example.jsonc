@@ -1,0 +1,37 @@
+{
+  // Merge only after both private buckets exist and their lifecycle rules have
+  // been applied and read back. This file contains no credential values.
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MEDIA_INTAKE_LEDGER",
+        "class_name": "MediaIntakeLedger"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "media-intake-v1",
+      "new_sqlite_classes": ["MediaIntakeLedger"]
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_QUARANTINE",
+      "bucket_name": "noa-show-media-quarantine"
+    },
+    {
+      "binding": "MEDIA_ELIGIBLE",
+      "bucket_name": "noa-show-media-eligible"
+    }
+  ],
+  "vars": {
+    "MEDIA_INTAKE_ENABLED": "false",
+    "MEDIA_INTAKE_REQUIRE_TURNSTILE": "false",
+    "MEDIA_INTAKE_EVENT_LABEL": "Replace during a reviewed event opening",
+    "MEDIA_INTAKE_INVITE_EXPIRES_AT": "Replace with an ISO-8601 expiry",
+    "MEDIA_INTAKE_MAX_DAILY_BYTES": "21474836480",
+    "MEDIA_INTAKE_MAX_FAILED_INVITE_ATTEMPTS_PER_HOUR": "20",
+    "MEDIA_INTAKE_MAX_SESSIONS_PER_IP_PER_HOUR": "120"
+  }
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /epk
+Disallow: /send
+
+Sitemap: https://noasaitoshii.com/sitemap.xml

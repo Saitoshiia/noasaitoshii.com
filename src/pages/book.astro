@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import '../styles/booking-inquiry.css'
+---
+
+<BaseLayout
+  title="Book Noa Saitoshii: Booking inquiry"
+  description="Contact Noa Saitoshii about performances, collaborations, and press."
+  noindex={true}
+>
+  <section class="booking-page page-shell" aria-labelledby="booking-title">
+    <header class="booking-page__header" data-reveal>
+      <h1 id="booking-title">Let’s make a room move.</h1>
+      <p class="booking-page__intro">
+        The structured inquiry form is still in private testing. For now,
+        bookings, collaborations, and press are handled directly.
+      </p>
+    </header>
+    <div class="contact-list" data-reveal>
+      <a href="mailto:contact@saitoshii.com">
+        <span>Email</span><strong>contact@saitoshii.com</strong>
+      </a>
+      <a href="https://www.instagram.com/noasaitoshii" target="_blank" rel="noreferrer">
+        <span>Direct</span><strong>Instagram</strong>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

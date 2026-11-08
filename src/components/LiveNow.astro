@@ -1,0 +1,392 @@
+---
+// "Happening now" module. Same structure as saitoshiia.com's LiveEventFeature;
+// brand styling differs. Sits between the hero and upcoming events, hidden until
+// an event is live (or simulated on localhost with ?preview-live=<slug>).
+import EventTime from './EventTime.astro'
+
+const { events = [] } = Astro.props
+const eligible = events.filter((event) => ['upcoming', 'live'].includes(event.status))
+---
+
+{eligible.length > 0 && (
+  <section class="live-now page-shell" data-live-feature hidden aria-label="Happening now" aria-live="polite">
+    {eligible.map((event) => (
+      <article
+        class="live-now__card"
+        data-live-event
+        data-event-slug={event.slug}
+        data-event-title={event.title}
+        data-event-status={event.status}
+        data-event-start={event.startsAt}
+        data-event-end={event.endsAt}
+        data-event-stream={event.streamUrl ?? undefined}
+        data-noa-start={event.noaStartsAt ?? undefined}
+        data-noa-end={event.noaEndsAt ?? undefined}
+        hidden
+      >
+        <div class="live-now__body">
+          <p class="live-now__tag"><span class="live-now__dot" aria-hidden="true"></span>Live now</p>
+          <h2 class="live-now__title">{event.title}</h2>
+          <p class="live-now__facts">
+            <EventTime startsAt={event.startsAt} endsAt={event.endsAt} eventTimeZone={event.eventTimeZone} preferViewerLocal />
+            <span>{event.address ?? event.location}</span>
+          </p>
+          <p class="live-now__onstage" data-live-noa-set hidden></p>
+          <p class="live-now__onstage" data-live-headline hidden></p>
+          <div class="live-now__actions">
+            <a class="button" data-live-stream-link rel="noopener" hidden>Watch live</a>
+            <a class="button button--secondary" href={`/events/${event.slug}/`}>Details</a>
+          </div>
+        </div>
+        <div class="live-now__preview" data-live-embed hidden></div>
+
+        <div hidden aria-hidden="true">
+          {(event.setTimes ?? []).map((set) => (
+            <span
+              data-live-set
+              data-set-name={set.name}
+              data-set-start={set.startsAtUtc}
+              data-set-end={set.endsAtUtc}
+              data-set-stream={set.streamUrl ?? undefined}
+            ></span>
+          ))}
+        </div>
+      </article>
+    ))}
+  </section>
+)}
+
+<script>
+  import { getEventLifecycle, isPreservedEventStatus, toEpoch } from '../lib/event-lifecycle.mjs'
+  import { getLivePresentationAt, getTwitchEmbedUrl } from '../lib/live-events.mjs'
+
+  const LOOPBACK = new Set(['localhost', '127.0.0.1'])
+  const feature = document.querySelector('[data-live-feature]')
+  const nodes = feature ? Array.from(feature.querySelectorAll('[data-live-event]')) : []
+
+  const eventFromNode = (node) => ({
+    slug: node.dataset.eventSlug,
+    title: node.dataset.eventTitle,
+    status: node.dataset.eventStatus,
+    startsAtUtc: node.dataset.eventStart,
+    endsAtUtc: node.dataset.eventEnd,
+    streamUrl: node.dataset.eventStream || null,
+    setTimes: Array.from(node.querySelectorAll('[data-live-set]')).map((set) => ({
+      name: set.dataset.setName,
+      startsAtUtc: set.dataset.setStart,
+      endsAtUtc: set.dataset.setEnd,
+      streamUrl: set.dataset.setStream || null,
+    })),
+  })
+
+  // Same clock contract as the local simulator: ?preview-live=<slug> jumps to
+  // 30 minutes into that event; ?preview-at=<iso> sets an explicit time.
+  const getClock = () => {
+    const params = LOOPBACK.has(location.hostname) ? new URLSearchParams(location.search) : null
+    const previewSlug = params?.get('preview-live') ?? null
+    const previewAt = params?.get('preview-at') ? new Date(params.get('preview-at')) : null
+    const selected = previewSlug ? nodes.find((node) => node.dataset.eventSlug === previewSlug) : null
+    const start = toEpoch(selected?.dataset.eventStart)
+    const end = toEpoch(selected?.dataset.eventEnd)
+    const simulated = start !== null && end !== null && end > start
+      ? new Date(start + Math.min(30 * 60 * 1000, (end - start) / 2))
+      : null
+    const now = previewAt && Number.isFinite(previewAt.getTime()) ? previewAt : simulated || new Date()
+    return { now, previewSlug, previewing: Boolean(previewSlug && !previewAt) }
+  }
+
+  const timeFormat = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
+
+  const describeNoaSet = (node, now) => {
+    const start = toEpoch(node.dataset.noaStart)
+    const end = toEpoch(node.dataset.noaEnd)
+    if (start === null || end === null || end <= start) return null
+    const current = now.getTime()
+    if (current >= start && current < end) return { live: true, text: 'Noa is on now' }
+    if (current < start) return { live: false, text: `Noa plays at ${timeFormat.format(new Date(start))}` }
+    return { live: false, text: `Noa played until ${timeFormat.format(new Date(end))}` }
+  }
+
+  const setEmbed = (node, streamUrl) => {
+    const slot = node.querySelector('[data-live-embed]')
+    if (!slot) return
+    const existing = slot.querySelector('iframe')
+    if (!streamUrl) {
+      slot.hidden = true
+      slot.replaceChildren()
+      delete slot.dataset.liveStreamUrl
+      return
+    }
+    slot.hidden = false
+    if (slot.dataset.liveStreamUrl !== streamUrl) {
+      slot.replaceChildren()
+      slot.dataset.liveStreamUrl = streamUrl
+    } else if (existing || slot.querySelector('[data-live-poster]')) {
+      return
+    }
+
+    const channel = streamUrl.split('/').filter(Boolean).pop() || 'Twitch'
+    const poster = document.createElement('button')
+    poster.type = 'button'
+    poster.className = 'live-now__poster'
+    poster.dataset.livePoster = ''
+    poster.setAttribute('aria-label', `Watch live on Twitch: ${channel}`)
+
+    const glyph = document.createElement('span')
+    glyph.className = 'live-now__poster-glyph'
+    glyph.setAttribute('aria-hidden', 'true')
+    glyph.textContent = '▶'
+
+    const label = document.createElement('span')
+    label.className = 'live-now__poster-label'
+    label.textContent = 'Watch live on Twitch'
+
+    const channelLabel = document.createElement('span')
+    channelLabel.className = 'live-now__poster-channel'
+    channelLabel.textContent = channel
+
+    poster.append(glyph, label, channelLabel)
+    poster.addEventListener('click', () => {
+      const src = getTwitchEmbedUrl(streamUrl, location.hostname, { muted: false })
+      if (!src) return
+      const frame = document.createElement('iframe')
+      frame.title = `Live stream on Twitch: ${channel}`
+      frame.allow = 'autoplay; fullscreen'
+      frame.loading = 'lazy'
+      frame.src = src
+      slot.replaceChildren(frame)
+    })
+    slot.append(poster)
+  }
+
+  const refresh = () => {
+    if (!feature) return
+    const { now, previewSlug, previewing } = getClock()
+    const active = nodes.find((node) => {
+      const event = eventFromNode(node)
+      if (previewSlug) {
+        return event.slug === previewSlug && (previewing
+          ? getEventLifecycle(event, now).hasValidWindow && !isPreservedEventStatus(event.status)
+          : getEventLifecycle(event, now).isLive)
+      }
+      return getEventLifecycle(event, now).isLive
+    }) ?? null
+
+    nodes.forEach((node) => { node.hidden = node !== active })
+    feature.hidden = !active
+    document.documentElement.toggleAttribute('data-live-event-active', Boolean(active))
+    if (!active) return
+
+    const event = eventFromNode(active)
+    // A simulated event is re-windowed around "now" so it always reads as live.
+    const presentable = previewing
+      ? { ...event, status: 'upcoming', startsAtUtc: new Date(now.getTime() - 60000).toISOString(), endsAtUtc: new Date(now.getTime() + 3600000).toISOString() }
+      : event
+    const presentation = getLivePresentationAt(presentable, now)
+    if (!presentation) return
+
+    const noaSet = describeNoaSet(active, now)
+    const noaLine = active.querySelector('[data-live-noa-set]')
+    if (noaLine) {
+      noaLine.hidden = !noaSet
+      noaLine.textContent = noaSet?.text ?? ''
+      noaLine.toggleAttribute('data-noa-live', Boolean(noaSet?.live))
+    }
+
+    const currentSet = presentation.currentSet
+    const noaOnStage = Boolean(noaSet?.live) || /\bnoa\b/i.test(currentSet?.name ?? '')
+    const headline = active.querySelector('[data-live-headline]')
+    if (headline) {
+      headline.hidden = !currentSet || noaOnStage
+      headline.textContent = currentSet && !noaOnStage ? `On stage now: ${currentSet.name}` : ''
+    }
+
+    const link = active.querySelector('[data-live-stream-link]')
+    if (link instanceof HTMLAnchorElement) {
+      link.hidden = !presentation.streamUrl
+      if (presentation.streamUrl) {
+        link.href = presentation.streamUrl
+        link.textContent = noaOnStage ? 'Watch Noa live' : currentSet ? `Watch ${currentSet.name}` : 'Watch the stream'
+      }
+    }
+    setEmbed(active, presentation.streamUrl)
+  }
+
+  if (feature) {
+    refresh()
+    setInterval(refresh, 30000)
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh() })
+  }
+</script>
+
+<style>
+  .live-now {
+    padding-block: var(--s-space-6) var(--s-space-2);
+  }
+
+  .live-now[hidden],
+  .live-now__card[hidden],
+  .live-now [hidden] {
+    display: none;
+  }
+
+  .live-now__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(var(--s-space-6), 5vw, var(--s-space-10));
+    align-items: center;
+    padding: clamp(var(--s-space-5), 4vw, var(--s-space-8));
+    border-radius: var(--s-space-1);
+    background:
+      radial-gradient(70% 140% at 100% 100%, var(--noa-glow), transparent 70%),
+      color-mix(in oklch, var(--s-surface-panel) 90%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-text-primary) 9%, transparent);
+  }
+
+  .live-now__card:not(:has(.live-now__preview:not([hidden]))) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .live-now__body {
+    min-width: 0;
+  }
+
+  .live-now__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-space-2);
+    padding: var(--s-space-1) var(--s-space-3);
+    border-radius: 999px;
+    font-family: var(--s-font-mono);
+    font-size: var(--s-type-size-caption-02);
+    letter-spacing: var(--s-type-tracking-caption);
+    text-transform: uppercase;
+    color: var(--s-text-accent);
+    background: color-mix(in oklch, var(--s-text-accent) 14%, transparent);
+  }
+
+  .live-now__dot {
+    width: var(--s-space-2);
+    height: var(--s-space-2);
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .live-now__title {
+    margin-block-start: var(--s-space-4);
+    font-family: var(--noa-font-display);
+    font-size: clamp(var(--s-type-size-header-05), 4vw, var(--s-type-size-header-03));
+    line-height: var(--s-type-line-heading-tight);
+    color: var(--noa-text-ivory);
+    text-wrap: balance;
+  }
+
+  .live-now__facts {
+    display: grid;
+    gap: var(--s-space-1);
+    margin-block-start: var(--s-space-3);
+    font-family: var(--s-font-mono);
+    font-size: var(--s-type-size-caption-01);
+    color: var(--s-text-secondary);
+    overflow-wrap: anywhere;
+  }
+
+  .live-now__onstage {
+    margin-block-start: var(--s-space-4);
+    color: var(--s-text-primary);
+  }
+
+  .live-now__onstage[data-noa-live] {
+    color: var(--s-text-accent);
+  }
+
+  .live-now__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-space-3);
+    margin-block-start: var(--s-space-6);
+  }
+
+  .live-now__preview {
+    aspect-ratio: 16 / 9;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--s-space-1);
+    background: var(--s-surface-canvas);
+    /* Image outline, not a border: stays neutral on any stream frame. */
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-text-primary) 10%, transparent);
+  }
+
+  .live-now__preview :global(.live-now__poster) {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-height: var(--s-space-32);
+    padding: var(--s-space-6);
+    border: 0;
+    place-items: center;
+    align-content: center;
+    gap: var(--s-space-2);
+    color: var(--s-text-primary);
+    background: color-mix(in oklch, var(--s-surface-panel) 92%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-text-primary) 10%, transparent);
+    cursor: pointer;
+    transition: color var(--s-duration-xfast) var(--s-ease-out-quart), background var(--s-duration-fast) var(--s-ease-out-quart);
+  }
+
+  .live-now__preview :global(.live-now__poster:hover) {
+    color: var(--noa-text-ivory);
+    background: color-mix(in oklch, var(--s-surface-panel) 100%, transparent);
+  }
+
+  .live-now__preview :global(.live-now__poster-glyph) {
+    font-size: var(--s-type-size-header-04);
+    line-height: 1;
+    color: var(--s-text-accent);
+  }
+
+  .live-now__preview :global(.live-now__poster-label) {
+    font-family: var(--s-font-mono);
+    font-size: var(--s-type-size-caption-01);
+    letter-spacing: var(--s-type-tracking-caption);
+    text-transform: uppercase;
+  }
+
+  .live-now__preview :global(.live-now__poster-channel) {
+    font-size: var(--s-type-size-caption-01);
+    color: var(--s-text-muted);
+  }
+
+  .live-now__preview :global(iframe) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .live-now__dot {
+      animation: live-now-pulse var(--s-duration-regular) var(--s-ease-out-quart) infinite alternate;
+    }
+
+    @keyframes live-now-pulse {
+      from { opacity: 0.45; }
+      to { opacity: 1; }
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .live-now__card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .live-now__actions {
+      display: grid;
+    }
+
+    .live-now__actions .button {
+      justify-content: center;
+      white-space: normal;
+    }
+  }
+</style>

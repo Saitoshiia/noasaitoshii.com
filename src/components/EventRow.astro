@@ -1,0 +1,45 @@
+---
+import EventTime from './EventTime.astro'
+import { getEventRowMeta } from '../lib/event-presentation.mjs'
+
+const { event, archive = false } = Astro.props
+const startsAt = event.noaStartsAt || event.startsAt
+const stateAttributes = archive
+  ? {
+      'data-event-archive-row': '',
+      'data-event-start': event.startsAt,
+      'data-event-end': event.endsAt,
+    }
+  : {
+      'data-upcoming-event': '',
+      'data-event-end': event.endsAt,
+    }
+const previewAttributes = {
+  'data-preview-event': '',
+  'data-event-slug': event.slug,
+  'data-event-title': event.title,
+  'data-preview-start': event.startsAt,
+  'data-preview-end': event.endsAt,
+  'data-event-status': event.status,
+}
+const preferViewerLocal = event.type !== 'irl'
+const { experience, supporting } = getEventRowMeta(event)
+---
+
+<a class="index-row event-row" href={`/events/${event.slug}`} {...stateAttributes} {...previewAttributes}>
+  <span class="event-when">
+    <EventTime
+      startsAt={startsAt}
+      endsAt={event.noaEndsAt || event.endsAt}
+      eventTimeZone={event.eventTimeZone}
+      preferViewerLocal={preferViewerLocal}
+      compact
+    />
+  </span>
+  <span class="row-title"><strong>{event.title}</strong>{event.subtitle && !['Live on Twitch', 'A Saitoshiia event', 'An in-person appearance'].includes(event.subtitle) && <small>{event.subtitle}</small>}</span>
+  <span class="row-meta event-row__meta">
+    <span>{experience}</span>
+    {supporting.length > 0 && <span>{supporting.join(' · ')}</span>}
+  </span>
+  <span class="row-arrow" aria-hidden="true">↗</span>
+</a>

@@ -1,0 +1,161 @@
+---
+import {
+  formatEventDate,
+  formatEventRange,
+  formatEventWindow,
+  getTimeZoneLabel,
+  isValidTimeZone,
+  normalizeTimeZone,
+} from '../lib/event-time.mjs'
+
+const {
+  startsAt,
+  endsAt,
+  eventTimeZone = 'America/Los_Angeles',
+  preferViewerLocal = false,
+  compact = false,
+  class: className = '',
+} = Astro.props
+
+const validTimeZone = isValidTimeZone(eventTimeZone)
+const displayTimeZone = normalizeTimeZone(eventTimeZone)
+const fullTimeZoneLabel = getTimeZoneLabel(eventTimeZone, validTimeZone)
+const serverDate = formatEventDate(startsAt, displayTimeZone)
+const serverRange = formatEventRange(startsAt, endsAt, displayTimeZone)
+const serverWindow = formatEventWindow(startsAt, endsAt, displayTimeZone)
+const timeContext = preferViewerLocal ? 'Viewer-local time when available' : 'Venue time'
+
+---
+
+<span
+  class:list={['event-time', className]}
+  data-event-time
+  data-start={startsAt}
+  data-end={endsAt}
+  data-zone={displayTimeZone}
+  data-zone-invalid={!validTimeZone ? 'true' : undefined}
+  data-prefer-viewer-local={preferViewerLocal ? 'true' : undefined}
+  data-compact={compact ? 'true' : undefined}
+  title={`${timeContext}. Source timezone: ${fullTimeZoneLabel}`}
+  aria-label={`${timeContext}: ${serverWindow}`}
+>
+  <time class="event-time__date" datetime={startsAt} data-time-date>{serverDate}</time>
+  <span class="event-time__range" data-time-range>{serverRange}</span>
+  <span class="event-time__local" data-local hidden></span>
+</span>
+
+<style>
+  .event-time {
+    display: inline-grid;
+    gap: var(--s-space-1);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .event-time__date,
+  .event-time__range,
+  .event-time__local {
+    display: block;
+    white-space: nowrap;
+    color: var(--s-text-muted);
+    font-family: var(--s-font-mono);
+    font-size: var(--s-type-size-caption-02);
+    line-height: var(--s-type-line-caption);
+  }
+
+  .event-time__date {
+    color: var(--s-text-accent);
+    text-transform: uppercase;
+    letter-spacing: var(--s-type-tracking-caption);
+  }
+
+  .event-time__range {
+    color: var(--s-text-secondary);
+  }
+</style>
+
+<script>
+  const isValidZone = (value) => {
+    if (!value) return false
+    try {
+      new Intl.DateTimeFormat('en-US', { timeZone: value }).format()
+      return true
+    } catch {
+      return false
+    }
+  }
+
+  const viewerZone = (() => {
+    try {
+      const zone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      return isValidZone(zone) ? zone : null
+    } catch {
+      return null
+    }
+  })()
+
+  const formatDate = (startValue, zone) => new Intl.DateTimeFormat(undefined, {
+    timeZone: zone,
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(startValue))
+
+  const formatRange = (startValue, endValue, zone) => {
+    const safeZone = isValidZone(zone) ? zone : 'UTC'
+    const start = new Date(startValue)
+    const end = endValue ? new Date(endValue) : null
+    if (!Number.isFinite(start.getTime())) return 'Time unavailable'
+    const time = (date, includeZone = false) => new Intl.DateTimeFormat(undefined, {
+      timeZone: safeZone,
+      hour: 'numeric',
+      minute: '2-digit',
+      ...(includeZone ? { timeZoneName: 'short' } : {}),
+    }).format(date)
+    if (!end || !Number.isFinite(end.getTime())) return time(start, true)
+    const sameDay = new Intl.DateTimeFormat(undefined, {
+      timeZone: safeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(start) === new Intl.DateTimeFormat(undefined, {
+      timeZone: safeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(end)
+    return `${time(start)}–${time(end, true)}${sameDay ? '' : ' (+1 day)'}`
+  }
+
+  document.querySelectorAll('[data-event-time]').forEach((node) => {
+    const zone = node.dataset.zone || 'UTC'
+    const preferViewer = node.dataset.preferViewerLocal === 'true'
+    const compact = node.dataset.compact === 'true'
+    const date = node.querySelector('[data-time-date]')
+    const range = node.querySelector('[data-time-range]')
+    const local = node.querySelector('[data-local]')
+    const context = preferViewer ? 'Event time in your timezone' : 'Venue time'
+    if (viewerZone && preferViewer) {
+      if (date) date.textContent = formatDate(node.dataset.start, viewerZone)
+      if (range) range.textContent = formatRange(node.dataset.start, node.dataset.end, viewerZone)
+      node.setAttribute('aria-label', `${context}: ${date?.textContent ?? ''}, ${range?.textContent ?? ''}`)
+      node.title = `${context}. Source timezone: ${zone}`
+    } else if (viewerZone && viewerZone !== zone && local && !compact) {
+      local.textContent = `Your time · ${formatDate(node.dataset.start, viewerZone)}, ${formatRange(node.dataset.start, node.dataset.end, viewerZone)}`
+      local.title = viewerZone
+      local.hidden = false
+      node.setAttribute('aria-label', `Venue time: ${date?.textContent ?? ''}, ${range?.textContent ?? ''}. Your time is shown below.`)
+    } else {
+      node.setAttribute('aria-label', `${context}: ${date?.textContent ?? ''}, ${range?.textContent ?? ''}`)
+    }
+  })
+
+  document.querySelectorAll('[data-timezone-name]').forEach((node) => {
+    if (viewerZone) {
+      node.textContent = 'your timezone'
+      node.title = viewerZone
+    } else {
+      node.textContent = 'your timezone unavailable'
+    }
+  })
+</script>

@@ -1,0 +1,14 @@
+{
+  "Rules": [
+    {
+      "ID": "expire-pulled-media-after-fourteen-days",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "eligible/"
+      },
+      "Expiration": {
+        "Days": 14
+      }
+    }
+  ]
+}

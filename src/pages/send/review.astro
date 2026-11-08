@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import '../../styles/media-intake.css'
+---
+
+<BaseLayout
+  title="Media review: Noa Saitoshii"
+  description="Private local review surface for verified show media."
+  noindex={true}
+>
+  <section class="media-review page-shell" data-media-review>
+    <div class="media-review__heading">
+      <h1>Verified arrivals.</h1>
+      <p>Only files that passed the media-signature gate appear as downloadable.</p>
+    </div>
+    <section class="media-review__invitations" aria-labelledby="media-review-invitations">
+      <div>
+        <h2 id="media-review-invitations">Create a private drop link.</h2>
+        <p>The link identifies who you intended to invite. The recipient still confirms their details and permission.</p>
+      </div>
+      <form data-invitation-form>
+        <label>
+          Social handle
+          <input name="expectedHandle" maxlength="80" placeholder="@recipient" />
+        </label>
+        <label>
+          Name
+          <input name="expectedName" maxlength="80" autocomplete="off" />
+        </label>
+        <label>
+          Event
+          <input name="eventLabel" maxlength="120" placeholder="Show or venue" />
+        </label>
+        <label>
+          Link type
+          <select name="kind">
+            <option value="one-time">One-time recipient</option>
+            <option value="trusted">Trusted friend</option>
+          </select>
+        </label>
+        <label>
+          Active days
+          <input name="lifetimeDays" type="number" min="1" max="30" value="7" required />
+        </label>
+        <button type="submit">Create private link</button>
+      </form>
+      <div class="media-review__generated" data-generated-invitation hidden>
+        <label for="generated-invitation-url">Copy this link into the private DM</label>
+        <div>
+          <input id="generated-invitation-url" data-generated-invitation-url readonly />
+          <button type="button" data-copy-invitation>Copy</button>
+        </div>
+        <small>The full link is shown once. Miinrva stores only a one-way fingerprint of its secret.</small>
+      </div>
+      <div class="media-review__invitation-list" data-invitation-list></div>
+    </section>
+    <div class="media-intake__notice" data-review-notice role="status" aria-live="polite">
+      <span class="media-intake__notice-mark" aria-hidden="true"></span>
+      <span data-review-notice-copy>Loading the private holding bin…</span>
+    </div>
+    <dl class="media-review__metrics" data-review-metrics aria-label="Holding bin status"></dl>
+    <div class="media-review__sessions" data-review-sessions></div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { mountMediaIntakeReview } from '../../lib/media-intake-review-client.js'
+  document.querySelectorAll('[data-media-review]').forEach((root) => mountMediaIntakeReview(root))
+</script>

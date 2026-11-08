@@ -1,0 +1,86 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "noa-saitoshii",
+  "main": "./worker/index.js",
+  "compatibility_date": "2026-07-07",
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "BOOKING_INQUIRY_IDEMPOTENCY",
+      "id": "97984ab1b82144d58d0e52baf5d8d56f"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "BOOKING_INQUIRY_QUEUE",
+        "queue": "noa-booking-inquiries-v1"
+      }
+    ]
+  },
+  "ratelimits": [
+    {
+      "name": "BOOKING_INQUIRY_RATE_LIMIT",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 2,
+        "period": 60
+      }
+    }
+  ],
+  "env": {
+    "local": {
+      "vars": {
+        "BOOKING_INQUIRY_MODE": "local",
+        "MEDIA_INTAKE_MODE": "local",
+        "MEDIA_INTAKE_ENABLED": "true"
+      },
+      "durable_objects": {
+        "bindings": [
+          {
+            "name": "MEDIA_INTAKE_LEDGER",
+            "class_name": "MediaIntakeLedger"
+          }
+        ]
+      },
+      "migrations": [
+        {
+          "tag": "media-intake-v1",
+          "new_sqlite_classes": ["MediaIntakeLedger"]
+        }
+      ],
+      "r2_buckets": [
+        {
+          "binding": "MEDIA_QUARANTINE",
+          "bucket_name": "noa-show-media-quarantine"
+        },
+        {
+          "binding": "MEDIA_ELIGIBLE",
+          "bucket_name": "noa-show-media-eligible"
+        }
+      ]
+    },
+    "staging": {
+      "workers_dev": true,
+      "preview_urls": false,
+      "vars": {
+        "ACCESS_AUTH_REQUIRED": "true",
+        "MEDIA_INTAKE_ENABLED": "false"
+      },
+      "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+        "run_worker_first": ["/*"]
+      }
+    }
+  }
+}

@@ -1,0 +1,1760 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-01T04:40:46.852Z",
+  "semanticChecksum": "7418a7ab675ef8116e0fdbe8b2d27d7336b9bef4a274e6b1888f563f6af674c5",
+  "sourceWindow": {
+    "from": "2026-10-02",
+    "to": "2027-04-30"
+  },
+  "events": [
+    {
+      "slug": "noa-s-listening-lounge-midweek-reset-2026-10-01",
+      "title": "Noa’s Listening Lounge: Midweek Reset",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-01T00:00:00Z",
+      "endsAtUtc": "2026-10-01T02:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-10-01T00:00:00.000Z",
+          "endsAtUtc": "2026-10-01T02:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-01T00:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-01T02:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-sparkle-gang-takeover-2026-10-02",
+      "title": "Obsidian: Sparkle Gang Takeover",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-03T03:00:00Z",
+      "endsAtUtc": "2026-10-03T08:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Apple Twisted",
+          "url": "https://www.twitch.tv/appletwisted"
+        },
+        {
+          "name": "Kali Jams",
+          "url": "https://www.twitch.tv/kalijams"
+        },
+        {
+          "name": "Sourdough",
+          "url": "https://www.twitch.tv/sourdoughburgerbuns"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Apple Twisted",
+          "startsAtUtc": "2026-10-03T03:00:00.000Z",
+          "endsAtUtc": "2026-10-03T04:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/appletwisted"
+        },
+        {
+          "name": "Kali Jams",
+          "startsAtUtc": "2026-10-03T04:30:00.000Z",
+          "endsAtUtc": "2026-10-03T06:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/kalijams"
+        },
+        {
+          "name": "Sourdough",
+          "startsAtUtc": "2026-10-03T06:00:00.000Z",
+          "endsAtUtc": "2026-10-03T08:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/sourdoughburgerbuns"
+        }
+      ],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/appletwisted",
+      "audiences": {
+        "noaSaitoshii": false,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "prominence-field-trip-2026-10-04",
+      "title": "Prominence: Field Trip",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-04T22:00:00Z",
+      "endsAtUtc": "2026-10-05T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "prominence-field-trip",
+      "venueName": "Prominence: Field Trip",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": null,
+      "genre": [
+        "Melodic House",
+        "Progressive"
+      ],
+      "vibe": "relaxing day in nature",
+      "theme": "outdoor summer festival attire",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii b2b Whimxi",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii b2b Whimxi",
+          "startsAtUtc": "2026-10-04T22:00:00.000Z",
+          "endsAtUtc": "2026-10-05T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-04T22:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-05T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-b2b-whimxi-b2b-8bitmeik-b2b-amelia-2026-10-06",
+      "title": "Noa b2b Whimxi b2b 8BitMeik b2b Amelia",
+      "eventType": "stream",
+      "status": "past",
+      "startsAtUtc": "2026-10-07T00:00:00Z",
+      "endsAtUtc": "2026-10-07T05:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": null,
+      "venueName": null,
+      "locationDisplay": "Twitch",
+      "address": null,
+      "genre": [
+        "Open Format EDM"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "8BitMeik b2b Amelia",
+          "url": "https://www.twitch.tv/8bitmeik"
+        },
+        {
+          "name": "Noa Saitoshii b2b Whimxi b2b 8BitMeik b2b Amelia",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "8BitMeik b2b Amelia",
+          "startsAtUtc": "2026-10-07T00:00:00.000Z",
+          "endsAtUtc": "2026-10-07T02:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/8bitmeik"
+        },
+        {
+          "name": "Noa Saitoshii b2b Whimxi b2b 8BitMeik b2b Amelia",
+          "startsAtUtc": "2026-10-07T02:00:00.000Z",
+          "endsAtUtc": "2026-10-07T05:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-07T02:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-07T05:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": false
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-w-8bitmeik-whimxi-petirwyn-2026-10-07",
+      "title": "Noa’s Listening Lounge: w/ 8BitMeik, Whimxi, Petirwyn",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-08T01:00:00Z",
+      "endsAtUtc": "2026-10-08T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format Music Share"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii, Whimxi, 8BitMeik, Petirwyn",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii, Whimxi, 8BitMeik, Petirwyn",
+          "startsAtUtc": "2026-10-08T01:00:00.000Z",
+          "endsAtUtc": "2026-10-08T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-08T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-08T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-noa-b2b-meik-b2b-whim-2026-10-09",
+      "title": "Obsidian: Noa b2b Meik b2b Whim",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-10T03:00:00Z",
+      "endsAtUtc": "2026-10-10T08:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance",
+        "DnB"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii b2b Whimxi b2b 8BitMeik",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii b2b Whimxi b2b 8BitMeik",
+          "startsAtUtc": "2026-10-10T03:00:00.000Z",
+          "endsAtUtc": "2026-10-10T08:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-10T03:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-10T08:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-friends-mega-6-dj-s-b2b-2026-10-10",
+      "title": "Noa & Friends Mega 6+ DJ’s B2B!",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-11T01:00:00Z",
+      "endsAtUtc": "2026-10-11T09:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": null,
+      "venueName": "Prominence: Garden Party",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Open Format EDM"
+      ],
+      "vibe": "House Party!",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa & Friends Mega B2B! (Noa Saitoshii, Whimxi, 8BitMeik, Triode, Petirwyn, Tim3 Signatur3, Chri5py, Jaybird)",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa & Friends Mega B2B! (Noa Saitoshii, Whimxi, 8BitMeik, Triode, Petirwyn, Tim3 Signatur3, Chri5py, Jaybird)",
+          "startsAtUtc": "2026-10-11T01:00:00.000Z",
+          "endsAtUtc": "2026-10-11T09:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-11T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-11T09:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": false
+      }
+    },
+    {
+      "slug": "glimmerglade-2026-10-11",
+      "title": "Glimmerglade",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-11T22:00:00Z",
+      "endsAtUtc": "2026-10-12T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii b2b Whimxi",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii b2b Whimxi",
+          "startsAtUtc": "2026-10-11T22:00:00.000Z",
+          "endsAtUtc": "2026-10-12T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-11T22:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-12T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "housing-tour-spooky-builds-w-iso-alaura-2026-10-13",
+      "title": "Housing Tour: Spooky Builds w/ Iso & Alaura",
+      "eventType": "stream",
+      "status": "past",
+      "startsAtUtc": "2026-10-14T01:00:00Z",
+      "endsAtUtc": "2026-10-14T04:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": null,
+      "venueName": null,
+      "locationDisplay": "Twitch",
+      "address": null,
+      "genre": [],
+      "vibe": null,
+      "theme": null,
+      "topic": "Housing",
+      "lineupStatus": "not-applicable",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": false,
+        "saitoshiia": false
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-2026-10-14",
+      "title": "Noa’s Listening Lounge",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-15T00:00:00Z",
+      "endsAtUtc": "2026-10-15T02:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format Electronic"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-10-15T00:00:00.000Z",
+          "endsAtUtc": "2026-10-15T02:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-15T00:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-15T02:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-2026-10-16",
+      "title": "Obsidian",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-17T03:00:00Z",
+      "endsAtUtc": "2026-10-17T08:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Ineffabelle",
+          "url": "https://www.twitch.tv/ineffabelle"
+        },
+        {
+          "name": "2.0",
+          "url": "https://www.twitch.tv/tw0p0intzer0"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Ineffabelle",
+          "startsAtUtc": "2026-10-17T03:00:00.000Z",
+          "endsAtUtc": "2026-10-17T04:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/ineffabelle"
+        },
+        {
+          "name": "2.0",
+          "startsAtUtc": "2026-10-17T04:30:00.000Z",
+          "endsAtUtc": "2026-10-17T06:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/tw0p0intzer0"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-10-17T06:00:00.000Z",
+          "endsAtUtc": "2026-10-17T08:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-17T06:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-17T08:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "prominence-spooky-field-trip-2026-10-18",
+      "title": "Prominence: Spooky Field Trip",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-18T22:00:00Z",
+      "endsAtUtc": "2026-10-19T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "prominence-field-trip",
+      "venueName": "Prominence: Field Trip",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": null,
+      "genre": [
+        "Melodic Techno",
+        "Progressive"
+      ],
+      "vibe": "haunted day out in nature",
+      "theme": "Halloween costumes",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Sourdough",
+          "url": "https://www.twitch.tv/sourdoughburgerbuns"
+        },
+        {
+          "name": "Whimxi",
+          "url": "https://www.twitch.tv/whimxily"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Sourdough",
+          "startsAtUtc": "2026-10-18T22:00:00.000Z",
+          "endsAtUtc": "2026-10-18T23:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/sourdoughburgerbuns"
+        },
+        {
+          "name": "Whimxi",
+          "startsAtUtc": "2026-10-18T23:30:00.000Z",
+          "endsAtUtc": "2026-10-19T01:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/whimxily"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-10-19T01:00:00.000Z",
+          "endsAtUtc": "2026-10-19T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-19T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-19T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-2026-10-23",
+      "title": "Obsidian",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-24T03:00:00Z",
+      "endsAtUtc": "2026-10-24T08:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Devil Cyborg",
+          "url": "https://www.twitch.tv/devil_cyborg"
+        },
+        {
+          "name": "Whimxi",
+          "url": "https://www.twitch.tv/whimxily"
+        },
+        {
+          "name": "Sourdough",
+          "url": "https://www.twitch.tv/sourdoughburgerbuns"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Devil Cyborg",
+          "startsAtUtc": "2026-10-24T03:00:00.000Z",
+          "endsAtUtc": "2026-10-24T04:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/devil_cyborg"
+        },
+        {
+          "name": "Whimxi",
+          "startsAtUtc": "2026-10-24T04:30:00.000Z",
+          "endsAtUtc": "2026-10-24T06:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/whimxily"
+        },
+        {
+          "name": "Sourdough",
+          "startsAtUtc": "2026-10-24T06:00:00.000Z",
+          "endsAtUtc": "2026-10-24T08:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/sourdoughburgerbuns"
+        }
+      ],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/devil_cyborg",
+      "audiences": {
+        "noaSaitoshii": false,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "glimmerglade-2026-10-25",
+      "title": "Glimmerglade",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-25T22:00:00Z",
+      "endsAtUtc": "2026-10-26T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Weasel",
+          "url": "https://www.twitch.tv/nweasel"
+        },
+        {
+          "name": "Kali",
+          "url": "https://www.twitch.tv/kalijams"
+        },
+        {
+          "name": "Whimxi",
+          "url": "https://www.twitch.tv/whimxily"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Weasel",
+          "startsAtUtc": "2026-10-25T22:00:00.000Z",
+          "endsAtUtc": "2026-10-25T23:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/nweasel"
+        },
+        {
+          "name": "Kali",
+          "startsAtUtc": "2026-10-25T23:30:00.000Z",
+          "endsAtUtc": "2026-10-26T01:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/kalijams"
+        },
+        {
+          "name": "Whimxi",
+          "startsAtUtc": "2026-10-26T01:00:00.000Z",
+          "endsAtUtc": "2026-10-26T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/whimxily"
+        }
+      ],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/nweasel",
+      "audiences": {
+        "noaSaitoshii": false,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-midweek-reset-2026-10-28",
+      "title": "Noa’s Listening Lounge: Midweek Reset",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-29T00:00:00Z",
+      "endsAtUtc": "2026-10-29T02:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Chill Melodic"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-10-29T00:00:00.000Z",
+          "endsAtUtc": "2026-10-29T02:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-10-29T00:00:00.000Z",
+      "noaEndsAtUtc": "2026-10-29T02:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "saitoshiia-community-halloween-party-2026-10-28",
+      "title": "Saitoshiia Community Halloween Party",
+      "eventType": "ffxiv",
+      "status": "past",
+      "startsAtUtc": "2026-10-29T00:00:00Z",
+      "endsAtUtc": "2026-10-29T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": null,
+      "venueName": "Saitoshiia: Event Center",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 38
+      },
+      "genre": [],
+      "vibe": null,
+      "theme": null,
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Doors open and activities begin!"
+        },
+        {
+          "name": "Nyah~! Dance Troupe"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Doors open and activities begin!",
+          "startsAtUtc": "2026-10-29T00:00:00.000Z",
+          "endsAtUtc": "2026-10-29T02:00:00.000Z"
+        },
+        {
+          "name": "Nyah~! Dance Troupe",
+          "startsAtUtc": "2026-10-29T02:00:00.000Z",
+          "endsAtUtc": "2026-10-29T03:00:00.000Z"
+        }
+      ],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": false,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": false,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-pres-rave-to-the-grave-tricks-treats-2026-10-31",
+      "title": "Obsidian pres. Rave To The Grave @ Tricks & Treats 2026",
+      "eventType": "ffxiv",
+      "status": "live",
+      "startsAtUtc": "2026-11-01T00:00:00Z",
+      "endsAtUtc": "2026-11-01T08:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Rafflesia",
+        "district": "Goblet",
+        "ward": 26,
+        "plot": 43
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Selena La Vixen",
+          "url": "https://www.twitch.tv/selena_la_vixen"
+        },
+        {
+          "name": "Kialee",
+          "url": "https://www.twitch.tv/kialee"
+        },
+        {
+          "name": "Cynaxia",
+          "url": "https://www.twitch.tv/cynaxia"
+        },
+        {
+          "name": "Devil Cyborg",
+          "url": "https://www.twitch.tv/devil_cyborg"
+        },
+        {
+          "name": "Apple Twisted",
+          "url": "https://www.twitch.tv/appletwisted"
+        },
+        {
+          "name": "Virus",
+          "url": "https://www.twitch.tv/dj_virus_"
+        },
+        {
+          "name": "Whimxi",
+          "url": "https://www.twitch.tv/whimxily"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Selena La Vixen",
+          "startsAtUtc": "2026-11-01T00:00:00.000Z",
+          "endsAtUtc": "2026-11-01T01:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/selena_la_vixen"
+        },
+        {
+          "name": "Kialee",
+          "startsAtUtc": "2026-11-01T01:00:00.000Z",
+          "endsAtUtc": "2026-11-01T02:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/kialee"
+        },
+        {
+          "name": "Cynaxia",
+          "startsAtUtc": "2026-11-01T02:00:00.000Z",
+          "endsAtUtc": "2026-11-01T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/cynaxia"
+        },
+        {
+          "name": "Devil Cyborg",
+          "startsAtUtc": "2026-11-01T03:00:00.000Z",
+          "endsAtUtc": "2026-11-01T04:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/devil_cyborg"
+        },
+        {
+          "name": "Apple Twisted",
+          "startsAtUtc": "2026-11-01T04:00:00.000Z",
+          "endsAtUtc": "2026-11-01T05:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/appletwisted"
+        },
+        {
+          "name": "Virus",
+          "startsAtUtc": "2026-11-01T05:00:00.000Z",
+          "endsAtUtc": "2026-11-01T06:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/dj_virus_"
+        },
+        {
+          "name": "Whimxi",
+          "startsAtUtc": "2026-11-01T06:00:00.000Z",
+          "endsAtUtc": "2026-11-01T07:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/whimxily"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-01T07:00:00.000Z",
+          "endsAtUtc": "2026-11-01T08:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-01T07:00:00.000Z",
+      "noaEndsAtUtc": "2026-11-01T08:00:00.000Z",
+      "eventInfoUrl": "https://tat26.xivrolladeck.com/#djs",
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "glimmerglade-day-of-the-dead-2026-11-01",
+      "title": "Glimmerglade: Day of the Dead",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-01T23:00:00Z",
+      "endsAtUtc": "2026-11-02T04:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Astrid Lindheim",
+          "url": "https://www.twitch.tv/astridlindj"
+        },
+        {
+          "name": "Party Zapper",
+          "url": "https://www.twitch.tv/partyzapper"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Astrid Lindheim",
+          "startsAtUtc": "2026-11-01T23:00:00.000Z",
+          "endsAtUtc": "2026-11-02T00:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/astridlindj"
+        },
+        {
+          "name": "Party Zapper",
+          "startsAtUtc": "2026-11-02T00:30:00.000Z",
+          "endsAtUtc": "2026-11-02T02:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/partyzapper"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-02T02:00:00.000Z",
+          "endsAtUtc": "2026-11-02T04:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-02T02:00:00.000Z",
+      "noaEndsAtUtc": "2026-11-02T04:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-midweek-reset-2026-11-04",
+      "title": "Noa’s Listening Lounge: Midweek Reset",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-05T01:00:00Z",
+      "endsAtUtc": "2026-11-05T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-05T01:00:00.000Z",
+          "endsAtUtc": "2026-11-05T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-05T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-11-05T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-2026-11-06",
+      "title": "Obsidian",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-07T04:00:00Z",
+      "endsAtUtc": "2026-11-07T09:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-solstice-horizon-2026-11-08",
+      "title": "Noa @ Solstice: Horizon",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-08T20:00:00Z",
+      "endsAtUtc": "2026-11-08T21:30:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": null,
+      "venueName": "Solstice: Horizon",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "EU",
+        "dataCenter": "Chaos",
+        "world": "Sagittarius",
+        "district": "Lav Beds",
+        "ward": 6,
+        "plot": 58
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": false
+      }
+    },
+    {
+      "slug": "glimmerglade-2026-11-08",
+      "title": "Glimmerglade",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-08T23:00:00Z",
+      "endsAtUtc": "2026-11-09T04:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-midweek-reset-2026-11-11",
+      "title": "Noa’s Listening Lounge: Midweek Reset",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-12T01:00:00Z",
+      "endsAtUtc": "2026-11-12T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-12T01:00:00.000Z",
+          "endsAtUtc": "2026-11-12T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-12T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-11-12T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-2026-11-13",
+      "title": "Obsidian",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-14T04:00:00Z",
+      "endsAtUtc": "2026-11-14T09:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "House",
+        "Techno",
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "glimmerglade-2026-11-15",
+      "title": "Glimmerglade",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-15T23:00:00Z",
+      "endsAtUtc": "2026-11-16T04:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-midweek-reset-2026-11-18",
+      "title": "Noa’s Listening Lounge: Midweek Reset",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-19T01:00:00Z",
+      "endsAtUtc": "2026-11-19T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-19T01:00:00.000Z",
+          "endsAtUtc": "2026-11-19T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-19T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-11-19T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "prominence-friendsgiving-2026-11-20",
+      "title": "Prominence: Friendsgiving",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-21T04:00:00Z",
+      "endsAtUtc": "2026-11-21T09:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "prominence-mainstage",
+      "venueName": "Prominence: Mainstage",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Rafflesia",
+        "district": "Lav Beds",
+        "ward": 1,
+        "plot": 3
+      },
+      "genre": [
+        "Mainstage House",
+        "Techno"
+      ],
+      "vibe": "EDM Festival",
+      "theme": "classy clubbing attire",
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "glimmerglade-2026-11-22",
+      "title": "Glimmerglade",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-22T23:00:00Z",
+      "endsAtUtc": "2026-11-23T04:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "noa-the-jungle-temple-2026-11-24",
+      "title": "Noa @ The Jungle Temple",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-24T18:00:00Z",
+      "endsAtUtc": "2026-11-25T00:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": null,
+      "venueName": "The Jungle Temple",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "EU",
+        "dataCenter": "Chaos",
+        "world": "Moogle",
+        "district": "Empyreum",
+        "ward": 7,
+        "plot": 22
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive"
+      ],
+      "vibe": "Chill Melodic",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Laarie",
+          "url": "https://www.twitch.tv/laarie"
+        },
+        {
+          "name": "Leysy",
+          "url": "https://www.twitch.tv/leysy_a"
+        },
+        {
+          "name": "Lokius",
+          "url": "https://www.twitch.tv/lokius"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Laarie",
+          "startsAtUtc": "2026-11-24T18:00:00.000Z",
+          "endsAtUtc": "2026-11-24T19:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/laarie"
+        },
+        {
+          "name": "Leysy",
+          "startsAtUtc": "2026-11-24T19:30:00.000Z",
+          "endsAtUtc": "2026-11-24T21:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/leysy_a"
+        },
+        {
+          "name": "Lokius",
+          "startsAtUtc": "2026-11-24T21:00:00.000Z",
+          "endsAtUtc": "2026-11-24T22:30:00.000Z",
+          "streamUrl": "https://www.twitch.tv/lokius"
+        },
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-24T22:30:00.000Z",
+          "endsAtUtc": "2026-11-25T00:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-24T22:30:00.000Z",
+      "noaEndsAtUtc": "2026-11-25T00:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": false
+      }
+    },
+    {
+      "slug": "noa-s-listening-lounge-midweek-reset-2026-11-25",
+      "title": "Noa’s Listening Lounge: Midweek Reset",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-26T01:00:00Z",
+      "endsAtUtc": "2026-11-26T03:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "listening-lounge",
+      "venueName": "Saitoshiia Listening Lounge",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 42
+      },
+      "genre": [
+        "Open Format"
+      ],
+      "vibe": null,
+      "theme": null,
+      "topic": "Listening session",
+      "lineupStatus": "confirmed",
+      "lineup": [
+        {
+          "name": "Noa Saitoshii",
+          "url": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "setTimes": [
+        {
+          "name": "Noa Saitoshii",
+          "startsAtUtc": "2026-11-26T01:00:00.000Z",
+          "endsAtUtc": "2026-11-26T03:00:00.000Z",
+          "streamUrl": "https://www.twitch.tv/noasaitoshii"
+        }
+      ],
+      "noaStartsAtUtc": "2026-11-26T01:00:00.000Z",
+      "noaEndsAtUtc": "2026-11-26T03:00:00.000Z",
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": "https://www.twitch.tv/noasaitoshii",
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "obsidian-trancegiving-2026-11-27",
+      "title": "Obsidian: Trancegiving",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-28T04:00:00Z",
+      "endsAtUtc": "2026-11-28T09:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "obsidian",
+      "venueName": "Obsidian",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 36
+      },
+      "genre": [
+        "Trance"
+      ],
+      "vibe": "all night rave",
+      "theme": "underground warehouse rave",
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    },
+    {
+      "slug": "glimmerglade-2026-11-29",
+      "title": "Glimmerglade",
+      "eventType": "ffxiv",
+      "status": "upcoming",
+      "startsAtUtc": "2026-11-29T23:00:00Z",
+      "endsAtUtc": "2026-11-30T04:00:00Z",
+      "eventTimeZone": "America/Los_Angeles",
+      "venueSlug": "glimmerglade",
+      "venueName": "Glimmerglade",
+      "locationDisplay": "Final Fantasy XIV · North America",
+      "address": {
+        "region": "North America",
+        "dataCenter": "Dynamis",
+        "world": "Marilith",
+        "district": "Goblet",
+        "ward": 9,
+        "plot": 35
+      },
+      "genre": [
+        "Melodic House",
+        "Progressive",
+        "Trance"
+      ],
+      "vibe": "relaxing Sunday reset",
+      "theme": null,
+      "topic": "DJ Set",
+      "lineupStatus": "tba",
+      "lineup": [],
+      "setTimes": [],
+      "noaStartsAtUtc": null,
+      "noaEndsAtUtc": null,
+      "eventInfoUrl": null,
+      "ticketUrl": null,
+      "isLivestream": true,
+      "streamUrl": null,
+      "audiences": {
+        "noaSaitoshii": true,
+        "saitoshiia": true
+      }
+    }
+  ]
+}

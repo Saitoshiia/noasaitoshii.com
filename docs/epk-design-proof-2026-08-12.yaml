@@ -1,0 +1,56 @@
+design_proof_id: noasaitoshii-epk-local-preview-2026-08-12
+timestamp: 2026-08-12T06:31:00-07:00
+contract_id: docs/epk-page-brief.md
+surface: noasaitoshii.com /epk private local preview
+design_proof_state: screenshot_proven
+design_drift_state: on_system
+functional_proof: >-
+  npm run build passed; npm test passed 60/60; git diff --check passed;
+  Daxson proof links to the generated event route; bio-copy interaction returned
+  Bio copied; robots metadata evaluated to noindex, nofollow; the static
+  data-derived biography sheet generated successfully.
+design_lint_result: >-
+  Focused EPK test rejects raw hex, rgb(a), and hsl(a) color literals and requires
+  responsive and reduced-motion rules; passed.
+token_compliance_result: >-
+  EPK styling uses the inherited Saitoshii token surface. No local color literals
+  or replacement design primitives were introduced.
+component_usage_result: >-
+  Reuses BaseLayout, Header, Footer, global button/text-link primitives, typography,
+  atmosphere, reveal behavior, and page-shell geometry. EPK-only composition is
+  confined to the page stylesheet and data module.
+accessibility_result: >-
+  Semantic article/header/nav/section/aside structure, labelled section navigation,
+  descriptive portrait alt text, native anchors and button, visible copy state,
+  reduced-motion handling, and zero horizontal overflow at both tested widths.
+  Automated contrast and screen-reader regression tooling is not currently wired.
+screenshot_or_preview_path:
+  - http://127.0.0.1:4321/epk
+  - /private/tmp/noasaitoshii-epk-desktop-2026-08-12.png
+  - /private/tmp/noasaitoshii-epk-mobile-2026-08-12.png
+  - /private/tmp/noasaitoshii-epk-bio-actions-2026-08-12.png
+  - /private/tmp/noasaitoshii-epk-portrait-fixed-2026-08-12.png
+responsive_widths_checked:
+  - 1280x720
+  - 390x844
+theme_or_brand_modes_checked:
+  - Noa Saitoshii L7 dark-warm artist brand
+design_enforcer_result: >-
+  Manual review passed for hierarchy, typography, spacing, responsive reflow,
+  brand coherence, disclosure accuracy, and buyer-facing information order.
+accepted_findings:
+  - Identity and sound lead before recognizable-artist proof.
+  - Relationship labels distinguish direct support, B2B, and shared-stage context.
+  - Missing live reel and press bundle are disclosed honestly instead of simulated.
+  - EPK remains locally navigable while search indexing is explicitly disabled.
+  - All three representative music entries use verified direct recording URLs.
+  - The downloadable biography sheet derives from the page's canonical EPK data.
+  - Portrait rendering preserves the source image's intrinsic square proportions.
+rejected_findings:
+  - Third-party artist profile links were not added; event evidence is more relevant.
+  - No generic logo wall, inflated billing implication, or unreviewed media placeholder.
+remaining_limitations:
+  - Noa must approve final copy and taste before release.
+  - Final live reel, approved press photography, credits, and press download bundle remain open.
+  - Automated contrast and screen-reader regression checks remain unwired.
+noa_taste_gate_required: true

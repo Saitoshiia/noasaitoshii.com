@@ -197,8 +197,11 @@ const eligible = events.filter((event) => ['upcoming', 'live'].includes(event.st
     const noaOnStage = Boolean(noaSet?.live) || /\bnoa\b/i.test(currentSet?.name ?? '')
     const headline = active.querySelector('[data-live-headline]')
     if (headline) {
-      headline.hidden = !currentSet || noaOnStage
-      headline.textContent = currentSet && !noaOnStage ? `On stage now: ${currentSet.name}` : ''
+      // Noa's own line already names Noa's set, so only the up-next half is added then.
+      const nextName = presentation.nextSet?.name
+      const text = noaOnStage ? (nextName ? `Up next: ${nextName}` : '') : presentation.lineupLine ?? ''
+      headline.hidden = !text
+      headline.textContent = text
     }
 
     const link = active.querySelector('[data-live-stream-link]')

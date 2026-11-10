@@ -185,10 +185,12 @@ export const projectGeneratedEvent = (event, authored = authoredEvents.find((can
   const metaverse = event.eventType === 'ffxiv'
   const stream = event.eventType === 'stream'
   const hasVenue = Boolean(event.venueSlug || event.venueName || event.address)
+  // Only events the shared bundle also publishes for Saitoshiia are labelled as Saitoshiia events.
+  const saitoshiiaEvent = event.audiences?.saitoshiia === true
   return {
     slug: event.slug,
     title: authored?.title || event.title,
-    subtitle: authored?.subtitle || (stream ? 'Live on Twitch' : metaverse ? 'A Saitoshiia event' : 'An in-person appearance'),
+    subtitle: authored?.subtitle || (stream ? 'Live on Twitch' : metaverse ? (saitoshiiaEvent ? 'A Saitoshiia event' : 'In Final Fantasy XIV') : 'An in-person appearance'),
     type: stream ? 'stream' : metaverse ? 'metaverse' : 'irl',
     startsAt: event.startsAtUtc,
     endsAt: event.endsAtUtc,
@@ -207,7 +209,7 @@ export const projectGeneratedEvent = (event, authored = authoredEvents.find((can
     cta: stream ? 'Watch the stream' : event.ticketUrl || event.eventInfoUrl ? 'Tickets & event information' : 'Stream & community',
     primaryUrl: event.ticketUrl || event.eventInfoUrl || event.streamUrl,
     streamUrl: event.streamUrl || null,
-    secondaryUrl: metaverse ? 'https://discord.gg/saitoshiia' : null,
+    secondaryUrl: metaverse && saitoshiiaEvent ? 'https://discord.gg/saitoshiia' : null,
     lineupStatus: event.lineupStatus,
     lineup: event.lineup,
     setTimes: event.setTimes,

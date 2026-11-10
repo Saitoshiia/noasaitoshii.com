@@ -33,6 +33,7 @@ Implementation workspace for Noa Saitoshii's artist website.
 | `src/components/EventRow.astro` | Shared timezone-aware event ledger row used by the homepage and complete archive. |
 | `src/pages/epk.astro` | Private-preview electronic press kit route with artist positioning, music, biography, performance evidence, press readiness, and booking paths. |
 | `src/data/` | Committed sanitized public event and listening content. |
+| `src/lib/event-ics.mjs`, `src/pages/events/[slug].ics.js` | Add-to-calendar file for each upcoming event, linked from its detail page. |
 | `src/lib/validate-events.mjs` | Public event allowlist and all-or-nothing lineup validator. |
 | `tests/` | Event publication and Cloudflare access regression tests. |
 | `src/styles/` | Global design tokens, layout, motion, and responsive styles. |

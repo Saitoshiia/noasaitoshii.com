@@ -255,3 +255,14 @@ test('shared event projection overrides stale source status after the event ends
   assert.deepEqual(getUpcomingEvents(source, now), [])
   assert.deepEqual(getPastEvents(source, now).map((event) => event.slug), ['elapsed-upcoming-detail'])
 })
+
+test('only events shared with Saitoshiia are labelled as Saitoshiia events', async () => {
+  const { projectGeneratedEvent } = await import('../src/data/events.js')
+  const base = { slug: 'x', title: 'X', eventType: 'ffxiv', startsAtUtc: '2026-12-04T03:00:00Z', endsAtUtc: '2026-12-04T05:00:00Z' }
+  const own = projectGeneratedEvent({ ...base, audiences: { noaSaitoshii: true, saitoshiia: false } }, null)
+  const shared = projectGeneratedEvent({ ...base, audiences: { noaSaitoshii: true, saitoshiia: true } }, null)
+  assert.equal(own.subtitle, 'In Final Fantasy XIV')
+  assert.equal(own.secondaryUrl, null)
+  assert.equal(shared.subtitle, 'A Saitoshiia event')
+  assert.equal(shared.secondaryUrl, 'https://discord.gg/saitoshiia')
+})

@@ -20,12 +20,27 @@ export const getCurrentSetAt = (event, now = new Date()) => {
   }) ?? null
 }
 
+// The set that starts next: after the current set ends, or after now between sets.
+export const getNextSetAt = (event, now = new Date()) => {
+  if (!isEventLiveAt(event, now) || !Array.isArray(event.setTimes)) return null
+  const currentSet = getCurrentSetAt(event, now)
+  const after = currentSet ? toEpoch(currentSet.endsAtUtc) : toEpoch(now)
+  return event.setTimes
+    .filter((set) => set !== currentSet && toEpoch(set.startsAtUtc) !== null && toEpoch(set.startsAtUtc) >= after)
+    .sort((a, b) => toEpoch(a.startsAtUtc) - toEpoch(b.startsAtUtc))[0] ?? null
+}
+
 export const getLivePresentationAt = (event, now = new Date()) => {
   if (!isEventLiveAt(event, now)) return null
   const currentSet = getCurrentSetAt(event, now)
+  const nextSet = getNextSetAt(event, now)
   const streamUrl = currentSet?.streamUrl ?? event.streamUrl ?? null
   return {
     currentSet,
+    nextSet,
+    lineupLine: [currentSet && `Live now: ${currentSet.name}`, nextSet && `Up next: ${nextSet.name}`]
+      .filter(Boolean)
+      .join('  →  ') || null,
     streamUrl,
     headline: currentSet ? `${currentSet.name} is live now` : `${event.title} is happening now`,
     streamCta: streamUrl
